@@ -1,4 +1,5 @@
-<?php require_once "./inc/header.php";
+<?php require_once '../inc/header.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -30,4 +31,4 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         </div>
     </div>
 </div>
-<?php require_once "./inc/footer.php"; ?>
+<?php require_once '../inc/footer.php' ?>

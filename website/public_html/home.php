@@ -1,4 +1,4 @@
-<?php require_once './inc/header.php';
+<?php require_once '../inc/header.php';
 
 if (!Session::get('userId')) {
     header("Location: login.php");
@@ -7,4 +7,4 @@ if (!Session::get('userId')) {
 ?>
 
 <h1>Bienvenue <?= Session::get('username') ?> !</h1>
-<?php require_once './inc/footer.php'; ?>
+<?php require_once '../inc/footer.php' ?>

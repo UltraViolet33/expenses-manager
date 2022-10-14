@@ -9,7 +9,7 @@ require_once __DIR__ . "/../connection/Session.php";
 class User
 {
 
-    private Helper $helper;
+    private $helper;
     private $db;
 
     public function __construct()
