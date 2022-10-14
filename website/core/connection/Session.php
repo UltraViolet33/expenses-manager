@@ -41,4 +41,10 @@ class Session
 
         return false;
     }
+
+    public static function destroy()
+    {
+        session_destroy();
+        echo "<script>window.location='login.php';</script>";
+    }
 }

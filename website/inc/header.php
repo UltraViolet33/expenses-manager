@@ -1,7 +1,10 @@
 <?php
-
 require_once __DIR__ . '/../core/connection/Session.php';
 Session::init();
+require_once __DIR__ . '/../core/classes/User.php';
+require_once __DIR__ . '/../core/helpers/Format.php';
+$user = new User();
+$format = new Format();
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +28,20 @@ Session::init();
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./login.php">Login</a>
-                    </li>
+
+                    <?php if (Session::get('userId')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="./logout.php">log out</a>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.php">Login</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

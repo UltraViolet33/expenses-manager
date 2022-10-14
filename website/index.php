@@ -1,5 +1,5 @@
-<?php require_once './inc/header.php' ?>
+<?php require_once './inc/header.php'; ?>
 <div class="container">
-    <h1>Heelo</h1>
+    <h1>Welcome on your Expenses Manager ! </h1>
 </div>
 <?php require_once './inc/footer.php' ?>
