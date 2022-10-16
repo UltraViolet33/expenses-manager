@@ -43,8 +43,8 @@ class User
         if ($result) {
             Session::set('userId', $result->id_user);
             Session::set('username', $result->name);
-            header("Location: Home.php");
-            return;
+            // header("Location: Home.php");
+            return true;
         }
 
         return $this->helper->alertMessage('danger', 'wrong credential', "wrong email or password");

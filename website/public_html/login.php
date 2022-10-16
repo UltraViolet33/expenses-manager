@@ -6,6 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $email = $format->validation($_POST['email']);
         $password = $format->validation($_POST['password']);
         $login =  $user->login($email, $password);
+        if($login): ?>
+        
+             <script> location.replace("home.php"); </script>
+        <?php endif;
     }
 }
 
