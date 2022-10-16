@@ -2,8 +2,10 @@
 require_once __DIR__ . '/../core/connection/Session.php';
 Session::init();
 require_once __DIR__ . '/../core/classes/User.php';
+require_once __DIR__ . '/../core/classes/Category.php';
 require_once __DIR__ . '/../core/helpers/Format.php';
 $user = new User();
+$category = new Category();
 $format = new Format();
 ?>
 
@@ -38,6 +40,9 @@ $format = new Format();
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./logout.php">log out</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./categories/allCategories.php">See categories</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">
