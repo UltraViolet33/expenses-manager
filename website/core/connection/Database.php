@@ -56,6 +56,18 @@ class Database
         return false;
     }
 
+    public function write($query, $data = array())
+    {
+        $this->getConnection();
+        $statement = $this->pdoInstance->prepare($query);
+        $result = $statement->execute($data);
+
+        if ($result) {
+            return true;
+        }
+        return false;
+    }
+
     public function closeConnection()
     {
         $this->pdoInstance = null;

@@ -1,6 +1,13 @@
 <?php require_once('../../inc/header.php'); 
 $allCategories = $category->getAll();
 ?>
+<?php if (!Session::get('userId')) : ?>
+
+<script>
+    location.replace("login.php")
+</script>
+
+<?php endif; ?>
 
 <div class="container my-5">
     <div class="row justify-content-center">

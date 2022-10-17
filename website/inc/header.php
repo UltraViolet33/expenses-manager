@@ -3,12 +3,13 @@ require_once __DIR__ . '/../core/connection/Session.php';
 Session::init();
 require_once __DIR__ . '/../core/classes/User.php';
 require_once __DIR__ . '/../core/classes/Category.php';
+require_once __DIR__ . '/../core/classes/Expense.php';
 require_once __DIR__ . '/../core/helpers/Format.php';
 $user = new User();
 $category = new Category();
+$expense = new Expense();
 $format = new Format();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,16 +34,16 @@ $format = new Format();
 
                     <?php if (Session::get('userId')) : ?>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./addExpense.php">Add Expense</a>
+                            <a class="nav-link" href="./addExpense.php">Ajouter une dépense</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./categories/allCategories.php">Catégories</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./logout.php">log out</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./categories/allCategories.php">See categories</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">

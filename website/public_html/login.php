@@ -1,17 +1,18 @@
 <?php require_once '../inc/header.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    
+
     if (isset($_POST['email']) && isset($_POST['password'])) {
+
         $email = $format->validation($_POST['email']);
         $password = $format->validation($_POST['password']);
+
         $login =  $user->login($email, $password);
-        if(is_bool($login)): ?>
-        
-    
-             <script> location.replace("home.php"); </script>
-        <?php endif;
+        if (is_bool($login)) : ?>
+            <script>
+                location.replace("/");
+            </script>
+<?php endif;
     }
 }
 
