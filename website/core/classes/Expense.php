@@ -43,4 +43,15 @@ class Expense
 
         return $this->db->write($sql, $data);
     }
+
+
+    public function selectExpensesGroupByMonthAndCategory()
+    {
+        $sql = "SELECT DATE_FORMAT(ex.created_at, '%M') AS month, 
+        ex.id_category, cat.name AS category_name,  SUM(ex.amount) AS total_expenses FROM expenses AS ex 
+        INNER JOIN categories AS cat ON cat.id_category = ex.id_category 
+        GROUP BY DATE_FORMAT(ex.created_at, '%M'), ex.id_category";
+
+        return $this->db->read($sql);
+    }
 }
