@@ -19,4 +19,10 @@ class Category
         $sql = "SELECT * FROM categories";
         return $this->db->read($sql);
     }
+
+    public function addCategory($data)
+    {
+        $sql = "INSERT INTO categories(name) VALUES(:name)";
+        return $this->db->write($sql, $data);
+    }
 }

@@ -1,5 +1,10 @@
 <?php require_once '../inc/header.php';
 $allExpenses = $expense->select();
+
+$totalExpenses = 0;
+foreach ($allExpenses as $expense) {
+    $totalExpenses += $expense->amount;
+}
 ?>
 <?php if (!Session::get('userId')) : ?>
     <script>
@@ -10,6 +15,9 @@ $allExpenses = $expense->select();
     <div class="row justify-content-center">
         <div class="col-12">
             <h1>Bienvenue <?= Session::get('username') ?></h1>
+        </div>
+        <div>
+            <h2>Total des dépenses : <?= $totalExpenses ?> €</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
             <table class="table">
