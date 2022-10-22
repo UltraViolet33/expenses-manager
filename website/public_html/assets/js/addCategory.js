@@ -6,6 +6,7 @@ function getCategory(event) {
   event.preventDefault();
   const inputCatName = document.getElementById("category_name");
   const categoryName = inputCatName.value;
+  inputCatName.value = "";
   if (categoryName != "") {
     addCategory(categoryName);
   }
@@ -34,6 +35,8 @@ function addCategory(categoryName) {
 const displayMessage = data => {
   const messageDiv = document.getElementById("message");
   const pElement = document.createElement("p");
+  pElement.textContent = "";
+
   pElement.textContent = data.message;
   messageDiv.appendChild(pElement);
 };

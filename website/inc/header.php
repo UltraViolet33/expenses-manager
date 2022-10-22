@@ -38,7 +38,7 @@ $format = new Format();
                             <a class="nav-link active" aria-current="page" href="<?= ROOT ?>">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/addExpense.php">Ajouter une dépense</a>
+                            <a class="nav-link" href="./addExpense.php">Ajouter une dépense</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./categories/allCategories.php">Catégories</a>

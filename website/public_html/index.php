@@ -2,8 +2,11 @@
 $allExpenses = $expense->select();
 
 $totalExpenses = 0;
-foreach ($allExpenses as $expense) {
-    $totalExpenses += $expense->amount;
+if ($allExpenses) {
+
+    foreach ($allExpenses as $expense) {
+        $totalExpenses += $expense->amount;
+    }
 }
 ?>
 <?php if (!Session::get('userId')) : ?>
@@ -20,28 +23,32 @@ foreach ($allExpenses as $expense) {
             <h2>Total des dépenses : <?= $totalExpenses ?> €</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Montant</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Catégorie</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($allExpenses as $expense) : ?>
+            <?php if ($allExpenses) : ?>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row"><?= $expense->id_expense ?></th>
-                            <td><?= $expense->expense_name ?></td>
-                            <td><?= $expense->amount ?></td>
-                            <td><?= $expense->created_at ?></td>
-                            <td><?= $expense->category_name ?></td>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Montant</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Catégorie</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($allExpenses as $expense) : ?>
+                            <tr>
+                                <th scope="row"><?= $expense->id_expense ?></th>
+                                <td><?= $expense->expense_name ?></td>
+                                <td><?= $expense->amount ?></td>
+                                <td><?= $expense->created_at ?></td>
+                                <td><?= $expense->category_name ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else : ?>
+                <h2>Pas de dépenses</h2>
+            <?php endif; ?>
         </div>
     </div>
 </div>

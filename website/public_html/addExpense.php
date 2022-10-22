@@ -3,10 +3,15 @@ $categories = $category->getAll();
 $script = "addCategory.js";
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $date = $_POST['created_at'];
+    if (empty($date)) {
+        $date = Date('Y-m-d');
+    }
+
     $name = $format->validation($_POST['name']);
     $amount = $format->validation($_POST['amount']);
     $category = $format->validation($_POST['category']);
-    $expense->create($name, $amount, $category);
+    $expense->create($name, $amount, $date, $category);
     echo "<script>location.replace('/')</script>";
 }
 ?>
@@ -39,11 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 </div>
                 <div class="mb-3">
                     <label for="amount" class="form-label">Montant</label>
-                    <input type="number" name="amount" class="form-control">
+                    <input type="number" step=".01" name="amount" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="created_at" class="form-label">Date</label>
+                    <input type="date" name="created_at" class="form-control">
                 </div>
                 <div class="mb-3">
                     <select class="form-select" name="category" id="categories-select">
-                        <option selected>Catégories</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id_category ?>"><?= $category->name ?></option>
                         <?php endforeach; ?>

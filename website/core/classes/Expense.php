@@ -28,7 +28,7 @@ class Expense
     }
 
 
-    public function create($name, $amount, $category)
+    public function create($name, $amount, $date, $category)
     {
         if (empty($name) || empty($amount) || empty($category)) {
             return $this->helper->alertMessage('danger', 'Empty field', 'Please fill all fields');
@@ -38,7 +38,7 @@ class Expense
 
         $data = [
             "name" => $name,
-            "amount" => $amount, "created_at" => Date("Y-m-d"), "id_category" => $category, "id_user" => Session::get('userId')
+            "amount" => $amount, "created_at" => $date, "id_category" => $category, "id_user" => Session::get('userId')
         ];
 
         return $this->db->write($sql, $data);
