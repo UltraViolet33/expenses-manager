@@ -28,17 +28,17 @@ class Expense
     }
 
 
-    public function create($name, $amount, $date, $category)
+    public function create($name, $amount, $date, $category, $period, $recurrence)
     {
         if (empty($name) || empty($amount) || empty($category)) {
             return $this->helper->alertMessage('danger', 'Empty field', 'Please fill all fields');
         }
 
-        $sql = "INSERT INTO expenses (name, amount, created_at, id_category, id_user) VALUES (:name, :amount, :created_at, :id_category, :id_user)";
+        $sql = "INSERT INTO expenses (name, amount, created_at, id_category, period, recurrence, id_user) VALUES (:name, :amount, :created_at, :id_category, :period, :recurrence, :id_user)";
 
         $data = [
             "name" => $name,
-            "amount" => $amount, "created_at" => $date, "id_category" => $category, "id_user" => Session::get('userId')
+            "amount" => $amount, "created_at" => $date, "id_category" => $category,"period" => $period, "recurrence" => $recurrence, "id_user" => Session::get('userId')
         ];
 
         return $this->db->write($sql, $data);
@@ -49,7 +49,7 @@ class Expense
     {
         $sql = "SELECT DATE_FORMAT(ex.created_at, '%M') AS month, 
         ex.id_category, cat.name AS category_name,  SUM(ex.amount) AS total_expenses FROM expenses AS ex 
-        INNER JOIN categories AS cat ON cat.id_category = ex.id_category 
+        INNER JOIN categories AS cat ON cat.id_category = ex.id_category WHERE ex.recurrence = 0
         GROUP BY DATE_FORMAT(ex.created_at, '%M'), ex.id_category";
 
         return $this->db->read($sql);
