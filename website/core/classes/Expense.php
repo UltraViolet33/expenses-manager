@@ -21,7 +21,7 @@ class Expense
     {
         $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, categories.name AS category_name FROM expenses AS ex
         INNER JOIN categories ON ex.id_category = categories.id_category  
-        WHERE ex.id_user = :id_user ORDER BY ex.created_at DESC LIMIT 10 ";
+        WHERE ex.id_user = :id_user AND ex.recurrence = 0 ORDER BY ex.created_at DESC LIMIT 10 ";
 
         $data['id_user'] = Session::get('userId');
         return $this->db->read($sql, $data);
@@ -38,7 +38,7 @@ class Expense
 
         $data = [
             "name" => $name,
-            "amount" => $amount, "created_at" => $date, "id_category" => $category,"period" => $period, "recurrence" => $recurrence, "id_user" => Session::get('userId')
+            "amount" => $amount, "created_at" => $date, "id_category" => $category, "period" => $period, "recurrence" => $recurrence, "id_user" => Session::get('userId')
         ];
 
         return $this->db->write($sql, $data);
@@ -53,5 +53,16 @@ class Expense
         GROUP BY DATE_FORMAT(ex.created_at, '%M'), ex.id_category";
 
         return $this->db->read($sql);
+    }
+    
+
+    public function selectExpensesRecurentes()
+    {
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.period, categories.name AS category_name FROM expenses AS ex
+        INNER JOIN categories ON ex.id_category = categories.id_category  
+        WHERE ex.recurrence = 1 AND ex.id_user = :id_user";
+
+        $data['id_user'] = Session::get('userId');
+        return $this->db->read($sql, $data);
     }
 }

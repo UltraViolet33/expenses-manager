@@ -47,6 +47,9 @@ $format = new Format();
                             <a class="nav-link" href="./data.php">Historique</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="./recurences.php">Recurentes</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="./logout.php">log out</a>
                         </li>
                     <?php else : ?>
