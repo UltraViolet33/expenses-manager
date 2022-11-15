@@ -32,6 +32,8 @@ if ($allExpenses) {
                             <th scope="col">Montant</th>
                             <th scope="col">Date</th>
                             <th scope="col">Catégorie</th>
+                            <th scope="col">Delete</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +44,8 @@ if ($allExpenses) {
                                 <td><?= $expense->amount ?></td>
                                 <td><?= $expense->created_at ?></td>
                                 <td><?= $expense->category_name ?></td>
+                                <td><a href="editExpense.php?id=<?= $expense->id_expense?>" class="btn btn-primary">Edit</a></td>
+                                <td><a href="deleteExpense.php?id=<?= $expense->id_expense?>" class="btn btn-danger" onclick="return confirm('Do you really want to delete this expense ?')">Delete</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -17,6 +17,16 @@ class Expense
     }
 
 
+
+    public function getSingleExpense($id)
+    {
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, categories.name AS category_name FROM expenses AS ex
+        INNER JOIN categories ON ex.id_category = categories.id_category WHERE id_expense = :id_expense";
+
+        return $this->db->readOneRow($sql, ["id_expense" => $id]);
+    }
+
+
     public function select()
     {
         $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, categories.name AS category_name FROM expenses AS ex
@@ -45,6 +55,25 @@ class Expense
     }
 
 
+
+    public function update($id, $name, $amount, $date, $category, $period, $recurrence)
+    {
+        if (empty($name) || empty($amount) || empty($category)) {
+            return $this->helper->alertMessage('danger', 'Empty field', 'Please fill all fields');
+        }
+
+        $sql = "UPDATE expenses SET name = :name, amount=:amount, created_at=:created_at, period=:period, recurrence=:recurrence, id_category=:id_category WHERE id_expense = :id_expense";
+
+        $data = [
+            "id_expense" => $id, "name" => $name,
+            "amount" => $amount, "created_at" => $date, "id_category" => $category, "period" => $period, "recurrence" => $recurrence
+        ];
+
+        return $this->db->write($sql, $data);
+    }
+
+
+
     public function selectExpensesGroupByMonthAndCategory()
     {
         $sql = "SELECT DATE_FORMAT(ex.created_at, '%M') AS month, 
@@ -54,7 +83,7 @@ class Expense
 
         return $this->db->read($sql);
     }
-    
+
 
     public function selectExpensesRecurentes()
     {
@@ -64,5 +93,12 @@ class Expense
 
         $data['id_user'] = Session::get('userId');
         return $this->db->read($sql, $data);
+    }
+
+
+    public function delete($id)
+    {
+        $sql = "DELETE FROM expenses WHERE id_expense = :id_expense";
+        return $this->db->write($sql, ["id_expense" => $id]);
     }
 }

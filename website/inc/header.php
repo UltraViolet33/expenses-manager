@@ -41,9 +41,6 @@ $format = new Format();
                             <a class="nav-link" href="./addExpense.php">Ajouter une dépense</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./categories/allCategories.php">Catégories</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="./data.php">Historique</a>
                         </li>
                         <li class="nav-item">
