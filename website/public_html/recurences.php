@@ -30,6 +30,8 @@ if ($expensesRecurentes) {
                             <th scope="col">Montant</th>
                             <th scope="col">Period</th>
                             <th scope="col">Catégorie</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +42,8 @@ if ($expensesRecurentes) {
                                 <td><?= $expense->amount ?></td>
                                 <td><?= $expense->period ?></td>
                                 <td><?= $expense->category_name ?></td>
+                                <td><a href="editExpense.php?id=<?= $expense->id_expense ?>" class="btn btn-primary">Edit</a></td>
+                                <td><a href="deleteExpense.php?id=<?= $expense->id_expense ?>" onclick="return confirm('Do you really want to delete this expense ?')" class="btn btn-danger">Delete</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -32,8 +32,8 @@ if ($allExpenses) {
                             <th scope="col">Montant</th>
                             <th scope="col">Date</th>
                             <th scope="col">Catégorie</th>
+                            <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
-                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
