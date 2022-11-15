@@ -13,19 +13,27 @@ var_dump($singleExpense);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
+    if (isset($_POST['recurrence'])) {
+        $date = null;
+        $period = $_POST['period'];
+        $recurrence = 1;
+    } else {
 
-    $date = $_POST['created_at'];
-    if (empty($date)) {
-        $date = Date('Y-m-d');
+        $date = $_POST['created_at'];
+        if (empty($date)) {
+            $date = Date('Y-m-d');
+        }
+        $period = null;
+        $recurrence = 0;
     }
-    $period = null;
-    $recurrence = 0;
 
 
     $name = $format->validation($_POST['name']);
     $amount = $format->validation($_POST['amount']);
     $category = $format->validation($_POST['category']);
     $expense->update($singleExpense->id_expense, $name, $amount, $date, $category, $period, $recurrence);
+
+    
     echo "<script>location.replace('/')</script>";
 }
 ?>
@@ -60,22 +68,25 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <label for="amount" class="form-label">Montant</label>
                     <input type="number" step=".01" name="amount" class="form-control" value="<?= $singleExpense->amount ?>">
                 </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" value="true" name="recurrence" id="inputRecurrence">
-                    <label class="form-check-label" for="recurence">
-                        Dépense récurrent
-                    </label>
-                </div>
-                <div class="mb-3" id="date">
-                    <label for="created_at" class="form-label">Date</label>
-                    <input type="date" name="created_at" class="form-control" value="<?= $singleExpense->created_at ?>">
-                </div>
-                <div class="mb-3" id="period" style="display:none">
-                    <select class="form-select" name="period">
-                        <option value="week">Each Week</option>
-                        <option value="month">Each Month</option>
-                    </select>
-                </div>
+                <?php if ($singleExpense->recurrence) : ?>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="true" name="recurrence" id="inputRecurrence" checked>
+                        <label class="form-check-label" for="recurence">
+                            Dépense récurrent
+                        </label>
+                    </div>
+                    <div class="mb-3" id="period">
+                        <select class="form-select" name="period">
+                            <option value="week">Each Week</option>
+                            <option value="month">Each Month</option>
+                        </select>
+                    </div>
+                <?php else : ?>
+                    <div class="mb-3" id="date">
+                        <label for="created_at" class="form-label">Date</label>
+                        <input type="date" name="created_at" class="form-control">
+                    </div>
+                <?php endif; ?>
                 <div class="mb-3">
                     <select class="form-select" name="category" id="categories-select">
                         <?php foreach ($categories as $category) : ?>

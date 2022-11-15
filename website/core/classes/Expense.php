@@ -20,7 +20,7 @@ class Expense
 
     public function getSingleExpense($id)
     {
-        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, categories.name AS category_name FROM expenses AS ex
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.period, ex.recurrence, ex.amount, ex.created_at, categories.name AS category_name FROM expenses AS ex
         INNER JOIN categories ON ex.id_category = categories.id_category WHERE id_expense = :id_expense";
 
         return $this->db->readOneRow($sql, ["id_expense" => $id]);

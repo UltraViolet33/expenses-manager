@@ -80,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                         <?php endforeach; ?>
                     </select>
                 </div>
-
                 <button class="btn btn-primary">Valider</button>
             </form>
         </div>
