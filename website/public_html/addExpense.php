@@ -1,28 +1,29 @@
 <?php require_once '../inc/header.php';
+
 $categories = $category->getAll();
 $script = "addCategory.js";
+
 $script2 = "formRecurence.js";
+
+$allRecurences = $recurenceModel->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    if (isset($_POST['recurrence'])) {
-        $date = null;
-        $period = $_POST['period'];
-        $recurrence = 1;
-    } else {
 
-        $date = $_POST['created_at'];
-        if (empty($date)) {
-            $date = Date('Y-m-d');
-        }
-        $period = null;
-        $recurrence = 0;
+    $data = [];
+
+    if (isset($_POST['recurrence'])) {
+        $data['created_at'] = Date('Y-m-d');
+        $data['id_recurence'] = $_POST['period'];
+    } else {
+        $data['created_at'] = $_POST['created_at'];
+        $data['id_recurence'] = null;
     }
 
-    $name = $format->validation($_POST['name']);
-    $amount = $format->validation($_POST['amount']);
-    $category = $format->validation($_POST['category']);
-    $expense->create($name, $amount, $date, $category, $period, $recurrence);
+    $data['name'] = $format->validation($_POST['name']);
+    $data['amount'] = $format->validation($_POST['amount']);
+    $data['id_category'] = $format->validation($_POST['category']);
+    $expense->create($data);
     echo "<script>location.replace('/')</script>";
 }
 ?>
@@ -69,14 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 </div>
                 <div class="mb-3" id="period" style="display:none">
                     <select class="form-select" name="period">
-                        <option value="week">Each Week</option>
-                        <option value="month">Each Month</option>
+                        <?php foreach ($allRecurences as $recurence) : ?>
+                            <option value="<?= $recurence->id_recurence ?>"><?= $recurence->period ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
                     <select class="form-select" name="category" id="categories-select">
                         <?php foreach ($categories as $category) : ?>
-                            
                             <option value="<?= $category->id_category ?>"><?= $category->name ?></option>
                         <?php endforeach; ?>
                     </select>

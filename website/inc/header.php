@@ -31,7 +31,7 @@ $format = new Format();
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div class="container-fluid ">
-            <a href="post" class="navbar-brand text-white">Expenses Manager</a>
+            <a href="/" class="navbar-brand text-white">Expenses Manager</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,26 +39,34 @@ $format = new Format();
                 <ul class="navbar-nav">
 
                     <?php if (Session::get('userId')) : ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?= ROOT ?>">Home</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Expenses
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./allExpenses.php">All expenses</a></li>
+                                <li><a class="dropdown-item" href="./addExpense.php">Add an expense</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./addExpense.php">Ajouter une dépense</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Incomes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./allIncomes.php">All incomes</a></li>
+                                <li><a class="dropdown-item" href="./addIncome.php">Add an income</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./addIncome.php">Ajouter un revenu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./allIncomes.php">Revenues</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profil
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./logout.php">Log out</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./data.php">Historique</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./recurences.php">Recurentes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./logout.php">log out</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">

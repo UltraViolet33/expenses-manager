@@ -2,6 +2,10 @@
 $categories = $category->getAll();
 $script = "addCategory.js";
 
+$allRecurences = $recurenceModel->getAll();
+$script = "formRecurence.js";
+
+
 if (!isset($_GET['id'])) {
     header("Location: index.php");
 }
@@ -52,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <label for="amount" class="form-label">Montant</label>
                     <input type="number" step=".01" name="amount" class="form-control" value="<?= $singleExpense->amount ?>">
                 </div>
-                <?php if ($singleExpense->recurrence) : ?>
+                <?php if ($singleExpense->id_recurence != NULL) : ?>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" value="true" name="recurrence" id="inputRecurrence" checked>
                         <label class="form-check-label" for="recurence">
@@ -61,8 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     </div>
                     <div class="mb-3" id="period">
                         <select class="form-select" name="period">
-                            <option value="week">Each Week</option>
-                            <option value="month">Each Month</option>
+                            <?php foreach ($allRecurences as $recurence) : ?>
+                                <?php if ($recurence->id_recurence == $singleExpense->id_recurence) : ?>
+                                    <option selected value="<?= $recurence->id_recurence ?>"><?= $recurence->period ?></option>
+                                <?php else : ?>
+                                    <option value="<?= $recurence->id_recurence ?>"><?= $recurence->period ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 <?php else : ?>
