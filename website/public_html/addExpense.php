@@ -1,6 +1,7 @@
 <?php require_once '../inc/header.php';
 $categories = $category->getAll();
 $script = "addCategory.js";
+$script2 = "formRecurence.js";
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
