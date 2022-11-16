@@ -1,7 +1,6 @@
 <?php require_once '../inc/header.php';
 $recurentIncomes = $incomeModel->selectRecurentIncomes();
 $otherIncomes = $incomeModel->selectIncomes();
-
 ?>
 <?php if (!Session::get('userId')) : ?>
     <script>
@@ -10,11 +9,8 @@ $otherIncomes = $incomeModel->selectIncomes();
 <?php endif; ?>
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-12">
-            <h1>Bienvenue <?= Session::get('username') ?></h1>
-        </div>
         <div>
-            <h2>Total des renevus récurrents : €</h2>
+            <h2>Revenus récurrents</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
             <?php if ($recurentIncomes) : ?>
@@ -45,11 +41,11 @@ $otherIncomes = $incomeModel->selectIncomes();
                     </tbody>
                 </table>
             <?php else : ?>
-                <h2>Pas de dépenses</h2>
+                <h2>Pas de revenus récurents</h2>
             <?php endif; ?>
         </div>
         <div>
-            <h2>Total des autres renevus : €</h2>
+            <h2>Autres revenus</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
             <?php if ($otherIncomes) : ?>
@@ -78,8 +74,9 @@ $otherIncomes = $incomeModel->selectIncomes();
                     </tbody>
                 </table>
             <?php else : ?>
-                <h2>Pas de dépenses</h2>
+                <h2>Pas d'autres revenus</h2>
             <?php endif; ?>
         </div>
     </div>
-    <?php require_once '../inc/footer.php' ?>
+</div>
+<?php require_once '../inc/footer.php' ?>
