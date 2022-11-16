@@ -19,7 +19,7 @@ class Expense
 
     public function getSingleExpense($id)
     {
-        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.period, ex.recurrence, ex.amount, ex.created_at, categories.name AS category_name FROM expenses AS ex
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.id_recurence, ex.created_at, categories.name AS category_name FROM expenses AS ex
         INNER JOIN categories ON ex.id_category = categories.id_category WHERE id_expense = :id_expense";
 
         return $this->db->readOneRow($sql, ["id_expense" => $id]);
@@ -36,20 +36,25 @@ class Expense
         return $this->db->read($sql, $data);
     }
 
-
-    public function create($name, $amount, $date, $category, $period, $recurrence)
+    
+    public function getRecurentExpenses()
     {
-        if (empty($name) || empty($amount) || empty($category)) {
-            return $this->helper->alertMessage('danger', 'Empty field', 'Please fill all fields');
-        }
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, categories.name AS category_name, recurences.period FROM expenses AS ex
+        INNER JOIN categories ON ex.id_category = categories.id_category  
+        INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence
+        WHERE ex.id_user = :id_user AND ex.id_recurence IS NOT NULL ORDER BY ex.created_at DESC LIMIT 10 ";
 
-        $sql = "INSERT INTO expenses (name, amount, created_at, id_category, period, recurrence, id_user) VALUES (:name, :amount, :created_at, :id_category, :period, :recurrence, :id_user)";
+        $data['id_user'] = Session::get('userId');
+        return $this->db->read($sql, $data);
+    }
 
-        $data = [
-            "name" => $name,
-            "amount" => $amount, "created_at" => $date, "id_category" => $category, "period" => $period, "recurrence" => $recurrence, "id_user" => Session::get('userId')
-        ];
 
+    public function create($data)
+    {
+        $sql = "INSERT INTO expenses(name, amount, created_at, id_category, id_recurence, id_user) 
+        VALUES (:name, :amount, :created_at, :id_category, :id_recurence, :id_user)";
+
+        $data['id_user'] = Session::get("userId");
         return $this->db->write($sql, $data);
     }
 
