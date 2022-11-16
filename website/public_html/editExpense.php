@@ -2,14 +2,11 @@
 $categories = $category->getAll();
 $script = "addCategory.js";
 
-
 if (!isset($_GET['id'])) {
     header("Location: index.php");
 }
 
 $singleExpense = $expense->getSingleExpense($_GET['id']);
-var_dump($singleExpense);
-
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
@@ -33,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $category = $format->validation($_POST['category']);
     $expense->update($singleExpense->id_expense, $name, $amount, $date, $category, $period, $recurrence);
 
-    
+
     echo "<script>location.replace('/')</script>";
 }
 ?>
@@ -44,19 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <?php endif; ?>
 <div class="container my-5">
     <div class="row justify-content-center">
-        <!-- <div class="col-12 col-md-8 mb-3">
-            <h1>Ajouter une catégorie de dépense</h1>
-            <form>
-                <div class="mb-3">
-                    <label for="category_name" class="form-label">Nom de la catégorie</label>
-                    <input type="text" id="category_name" name="category_name" class="form-control">
-                </div>
-                <button id="btn-submit-cat" class="btn btn-primary">Valider</button>
-                <div id="message">
-
-                </div>
-            </form>
-        </div> -->
         <div class="col-12 col-md-8">
             <h1>Editer une dépense</h1>
             <form action="" method="POST">

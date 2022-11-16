@@ -5,6 +5,6 @@ if (!isset($_GET['id'])) {
     header("Location: index.php");
 }
 
-$expense->delete($_GET["id"]);
+$incomeModel->delete($_GET["id"]);
 
-header("Location: index.php");
+header("Location: allIncomes.php");
