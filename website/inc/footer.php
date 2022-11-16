@@ -2,6 +2,9 @@
 <?php if (isset($script)) : ?>
     <script src="./assets/js/<?= $script ?>"></script>
 <?php endif; ?>
+<?php if (isset($script2)) : ?>
+    <script src="./assets/js/<?= $script2 ?>"></script>
+<?php endif; ?>
 </body>
 
 </html>

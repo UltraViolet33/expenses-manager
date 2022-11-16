@@ -3,12 +3,17 @@ require_once __DIR__ . '/../core/connection/Session.php';
 Session::init();
 require_once __DIR__ . '/../core/classes/User.php';
 require_once __DIR__ . '/../core/classes/Category.php';
+require_once __DIR__ . '/../core/classes/Recurence.php';
 require_once __DIR__ . '/../core/classes/Expense.php';
+require_once __DIR__ . '/../core/classes/Income.php';
 require_once __DIR__ . '/../core/helpers/Format.php';
 define('ROOT', "/public_html");
+
 $user = new User();
 $category = new Category();
+$recurenceModel = new Recurence();
 $expense = new Expense();
+$incomeModel = new Income();
 $format = new Format();
 ?>
 <!DOCTYPE html>
@@ -39,6 +44,12 @@ $format = new Format();
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./addExpense.php">Ajouter une dépense</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./addIncome.php">Ajouter un revenu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./allIncomes.php">Revenues</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./data.php">Historique</a>
