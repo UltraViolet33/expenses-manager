@@ -11,31 +11,27 @@ if (!isset($_GET['id'])) {
 }
 
 $singleExpense = $expense->getSingleExpense($_GET['id']);
+var_dump($singleExpense);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    if (isset($_POST['recurrence'])) {
-        $date = null;
-        $period = $_POST['period'];
-        $recurrence = 1;
-    } else {
+    $data = [];
+    $data['created_at'] = Date('Y-m-d');
 
-        $date = $_POST['created_at'];
-        if (empty($date)) {
-            $date = Date('Y-m-d');
-        }
-        $period = null;
-        $recurrence = 0;
+    if (isset($_POST['recurrence'])) {
+        $data['id_recurence'] = $_POST['period'];
+    } else {
+        $data['id_recurence'] = null;
     }
 
+    $data['name'] = $format->validation($_POST['name']);
+    $data['amount'] = $format->validation($_POST['amount']);
+    $data['id_category'] = $format->validation($_POST['category']);
 
-    $name = $format->validation($_POST['name']);
-    $amount = $format->validation($_POST['amount']);
-    $category = $format->validation($_POST['category']);
-    $expense->update($singleExpense->id_expense, $name, $amount, $date, $category, $period, $recurrence);
+    $data['id_expense'] = $singleExpense->id_expense;
 
-
-    echo "<script>location.replace('/')</script>";
+    $expense->update($data);
+    echo "<script>location.replace('/allExpenses.php')</script>";
 }
 ?>
 <?php if (!Session::get('userId')) : ?>
