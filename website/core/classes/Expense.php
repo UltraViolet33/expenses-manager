@@ -17,7 +17,6 @@ class Expense
     }
 
 
-
     public function getSingleExpense($id)
     {
         $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.period, ex.recurrence, ex.amount, ex.created_at, categories.name AS category_name FROM expenses AS ex
@@ -55,7 +54,6 @@ class Expense
     }
 
 
-
     public function update($id, $name, $amount, $date, $category, $period, $recurrence)
     {
         if (empty($name) || empty($amount) || empty($category)) {
@@ -71,7 +69,6 @@ class Expense
 
         return $this->db->write($sql, $data);
     }
-
 
 
     public function selectExpensesGroupByMonthAndCategory()

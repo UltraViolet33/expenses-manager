@@ -1,7 +1,6 @@
 <?php require_once '../inc/header.php';
 
 $allExpenses = $expense->selectExpensesGroupByMonthAndCategory();
-
 $allMonths = [];
 
 foreach ($allExpenses as $ex) {
