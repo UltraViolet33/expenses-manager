@@ -22,7 +22,7 @@ class Income
             return $this->helper->alertMessage('danger', 'Empty field', 'Please fill all fields');
         }
 
-        $sql = "INSERT INTO incomes (name, amount, created_at, id_user, id_recurence) VALUES (:name, :amount, :created_at, :id_user, :id_recurence)";
+        $sql = "INSERT INTO incomes (name, amount, created_at, id_user, id_recurence, status) VALUES (:name, :amount, :created_at, :id_user, :id_recurence, :status)";
 
         $data['id_user'] = Session::get('userId');
         return $this->db->write($sql, $data);
@@ -75,5 +75,20 @@ class Income
     {
         $sql = "DELETE FROM incomes WHERE id_income = :id_income";
         return $this->db->write($sql, ["id_income" => $id]);
+    }
+
+
+    public function getLeftRecurentIncomes()
+    {
+        $sql = "SELECT id_income, name, amount FROM incomes
+        WHERE id_recurence IS NOT NULL AND status = 0";
+        return $this->db->read($sql);
+    }
+
+
+    public function validate($data)
+    {
+        $sql = "UPDATE incomes SET status = 1 WHERE id_income = :id_income";
+        return $this->db->write($sql, $data);
     }
 }
