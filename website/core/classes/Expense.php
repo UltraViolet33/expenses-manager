@@ -16,17 +16,17 @@ class Expense
         $this->db = new Database();
     }
 
-    
+
     /**
      * getSingleExpense
      * get an expense by id
      * @param  mixed $id
-     * @return void
+     * @return object
      */
     public function getSingleExpense($id)
     {
         $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.id_recurence, ex.created_at, 
-        categories.name AS category_name FROM expenses AS ex 
+        categories.name AS category_name, categories.id_category FROM expenses AS ex 
         INNER JOIN categories ON ex.id_category = categories.id_category 
         WHERE id_expense = :id_expense";
         return $this->db->readOneRow($sql, ["id_expense" => $id]);
@@ -56,10 +56,27 @@ class Expense
     }
 
 
+    public function getLeftRecurentExpenses()
+    {
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount FROM expenses AS ex
+        INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence
+        WHERE ex.id_recurence IS NOT NULL AND ex.status = 0";
+        return $this->db->read($sql);
+    }
+
+
+    public function validate($data)
+    {
+        $sql = "UPDATE expenses SET status = 1 WHERE id_expense = :id_expense";
+        return $this->db->write($sql, $data);
+    }
+
+
     public function create($data)
     {
-        $sql = "INSERT INTO expenses(name, amount, created_at, id_category, id_recurence, id_user) 
-        VALUES (:name, :amount, :created_at, :id_category, :id_recurence, :id_user)";
+
+        $sql = "INSERT INTO expenses(name, amount, created_at, id_category, id_recurence, id_user, status) 
+        VALUES (:name, :amount, :created_at, :id_category, :id_recurence, :id_user, :status)";
         $data['id_user'] = Session::get("userId");
         return $this->db->write($sql, $data);
     }
@@ -72,7 +89,13 @@ class Expense
         return $this->db->write($sql, $data);
     }
 
-    
+    public function resetStatusRecurentExpenses()
+    {
+        $sql = "UPDATE expenses SET status = 0 WHERE id_recurence IS NOT NULL";
+        return $this->db->write($sql);
+    }
+
+
     /**
      * selectExpensesGroupByMonthAndCategory
      * select all non recurence expenses group by month and categories
@@ -87,7 +110,7 @@ class Expense
         return $this->db->read($sql);
     }
 
-    
+
     /**
      * getExpenses
      * get all expenses which are not recurents
@@ -100,7 +123,7 @@ class Expense
         return $this->db->read($sql);
     }
 
-    
+
     /**
      * delete
      * delete an expense by its id

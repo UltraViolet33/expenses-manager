@@ -13,9 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (isset($_POST['recurrence'])) {
         $data['id_recurence'] = $_POST['period'];
         $data['created_at'] = Date('Y-m-d');
+        $data['status'] = 0;
     } else {
         $data['id_recurence'] = null;
         $data['created_at'] = $format->validation($_POST['created_at']);
+        $data['status'] = null;
     }
 
     $incomeModel->create($data);

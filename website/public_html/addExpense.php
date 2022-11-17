@@ -15,9 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (isset($_POST['recurrence'])) {
         $data['created_at'] = Date('Y-m-d');
         $data['id_recurence'] = $_POST['period'];
+        $data['status'] = 0;
     } else {
         $data['created_at'] = $_POST['created_at'];
         $data['id_recurence'] = null;
+        $data['status'] = null;
+
     }
 
     $data['name'] = $format->validation($_POST['name']);
