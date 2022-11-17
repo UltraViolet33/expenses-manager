@@ -4,6 +4,9 @@ $actualMonth = date('m');
 
 $monthDB = $helperClass->getMonthDB();
 
+$wallet = $helperClass->getActualWallet();
+
+
 if ($actualMonth > $monthDB->actual_month) {
     $data = [
         "actual_month" => $actualMonth,
@@ -11,8 +14,18 @@ if ($actualMonth > $monthDB->actual_month) {
     ];
 
     $helperClass->updateMonth($data);
-
     $expense->resetStatusRecurentExpenses();
+
+    var_dump($monthDB);
+
+
+    $actualAmount = $helperClass->getAmountByMonth($monthDB->actual_month);
+    $data = [
+        "month" => $actualMonth,
+        "amount" => $actualAmount->amount
+    ];
+
+    $helperClass->insertNewAmount($data);
 }
 
 $recurentExpenseLeft = $expense->getLeftRecurentExpenses();
@@ -28,6 +41,8 @@ $recurentIncomesLeft = $incomeModel->getLeftRecurentIncomes();
     <div class="row justify-content-center">
         <div class="col-12">
             <h1>Bienjnue <?= Session::get('username') ?></h1>
+            <h1>Bienjnue <?= $wallet->amount ?> €</h1>
+
         </div>
         <div>
             <h2>Dépenses récurrentes restantes pour le mois actuel</h2>

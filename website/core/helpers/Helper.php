@@ -34,4 +34,23 @@ class Helper
         $sql = "UPDATE data_website SET actual_month = :actual_month WHERE actual_month = :old_month";
         return $this->db->write($sql, $data);
     }
+
+    public function getActualWallet()
+    {
+        $sql = "SELECT * FROM wallet ORDER BY id DESC LIMIT 1";
+        return $this->db->readOneRow($sql);
+    }
+
+
+    public function getAmountByMonth($month)
+    {
+        $sql = "SELECT * FROM wallet WHERE month = :month";
+        return $this->db->readOneRow($sql, ["month" => $month]);
+    }
+
+    public function insertNewAmount($data)
+    {
+        $sql = "INSERT INTO wallet(amount, month) VALUES (:amount, :month)";
+        return $this->db->write($sql, $data);
+    }
 }

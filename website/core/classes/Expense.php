@@ -78,7 +78,16 @@ class Expense
         $sql = "INSERT INTO expenses(name, amount, created_at, id_category, id_recurence, id_user, status) 
         VALUES (:name, :amount, :created_at, :id_category, :id_recurence, :id_user, :status)";
         $data['id_user'] = Session::get("userId");
-        return $this->db->write($sql, $data);
+         $this->db->write($sql, $data);
+
+
+         if($data['id_recurence'] == null)
+         {
+            $sql = "UPDATE wallet SET amount = amount - :expense ORDER BY id DESC LIMIT 1";
+
+            $this->db->write($sql, ["expense" => $data['amount']]);
+            
+         }
     }
 
 
