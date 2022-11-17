@@ -25,7 +25,16 @@ class Income
         $sql = "INSERT INTO incomes (name, amount, created_at, id_user, id_recurence, status) VALUES (:name, :amount, :created_at, :id_user, :id_recurence, :status)";
 
         $data['id_user'] = Session::get('userId');
-        return $this->db->write($sql, $data);
+        $this->db->write($sql, $data);
+
+        
+        if($data['id_recurence'] == null)
+        {
+           $sql = "UPDATE wallet SET amount = amount + :income ORDER BY id DESC LIMIT 1";
+
+           $this->db->write($sql, ["income" => $data['amount']]);
+           
+        }
     }
 
 
