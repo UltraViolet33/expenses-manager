@@ -10,11 +10,6 @@ if ($expensesRecurentes) {
     }
 }
 ?>
-<?php if (!Session::get('userId')) : ?>
-    <script>
-        location.replace("login.php")
-    </script>
-<?php endif; ?>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div>

@@ -22,9 +22,7 @@ class Income
             return $this->helper->alertMessage('danger', 'Empty field', 'Please fill all fields');
         }
 
-        $sql = "INSERT INTO incomes (name, amount, created_at, id_user, id_recurence, status) VALUES (:name, :amount, :created_at, :id_user, :id_recurence, :status)";
-
-        $data['id_user'] = Session::get('userId');
+        $sql = "INSERT INTO incomes (name, amount, created_at, id_recurence, status) VALUES (:name, :amount, :created_at, :id_recurence, :status)";
         $this->db->write($sql, $data);
 
         
@@ -99,5 +97,11 @@ class Income
     {
         $sql = "UPDATE incomes SET status = 1 WHERE id_income = :id_income";
         return $this->db->write($sql, $data);
+    }
+
+    public function resetStatusRecurentIncomes()
+    {
+        $sql = "UPDATE incomes SET status = 0 WHERE id_recurence IS NOT NULL";
+        $this->db->write($sql);
     }
 }

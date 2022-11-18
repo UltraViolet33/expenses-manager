@@ -4,10 +4,8 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-requested-With');
 
-require_once __DIR__ . '/../core/classes/User.php';
 require_once __DIR__ . '/../core/classes/Category.php';
 
-$user = new User();
 $category = new Category();
 
 $data = json_decode(file_get_contents("php://input"));

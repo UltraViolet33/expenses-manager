@@ -50,9 +50,8 @@ class Expense
         categories.name AS category_name, recurences.period FROM expenses AS ex
         INNER JOIN categories ON ex.id_category = categories.id_category  
         INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence
-        WHERE ex.id_user = :id_user AND ex.id_recurence IS NOT NULL ORDER BY ex.created_at DESC LIMIT 10 ";
-        $data['id_user'] = Session::get('userId');
-        return $this->db->read($sql, $data);
+        WHERE ex.id_recurence IS NOT NULL ORDER BY ex.created_at DESC LIMIT 10 ";
+        return $this->db->read($sql);
     }
 
 
@@ -75,9 +74,9 @@ class Expense
     public function create($data)
     {
 
-        $sql = "INSERT INTO expenses(name, amount, created_at, id_category, id_recurence, id_user, status) 
-        VALUES (:name, :amount, :created_at, :id_category, :id_recurence, :id_user, :status)";
-        $data['id_user'] = Session::get("userId");
+        $sql = "INSERT INTO expenses(name, amount, created_at, id_category, id_recurence, status) 
+        VALUES (:name, :amount, :created_at, :id_category, :id_recurence, :status)";
+        
          $this->db->write($sql, $data);
 
 

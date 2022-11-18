@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../core/connection/Session.php';
 Session::init();
-require_once __DIR__ . '/../core/classes/User.php';
 require_once __DIR__ . '/../core/classes/Category.php';
 require_once __DIR__ . '/../core/classes/Recurence.php';
 require_once __DIR__ . '/../core/classes/Expense.php';
@@ -11,7 +10,6 @@ require_once __DIR__ . '/../core/helpers/Helper.php';
 
 define('ROOT', "/public_html");
 
-$user = new User();
 $category = new Category();
 $recurenceModel = new Recurence();
 $expense = new Expense();
@@ -44,8 +42,6 @@ $helperClass = new Helper();
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-
-                    <?php if (Session::get('userId')) : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Expenses
@@ -75,11 +71,6 @@ $helperClass = new Helper();
                         <li class="nav-item">
                             <a class="nav-link" href="./data.php">Historique</a>
                         </li>
-                    <?php else : ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./login.php">Login</a>
-                        </li>
-                    <?php endif; ?>
                 </ul>
             </div>
         </div>

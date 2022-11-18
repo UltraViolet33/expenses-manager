@@ -19,17 +19,12 @@ foreach ($allExpenses as $ex) {
 
 ?>
 
-<?php if (!Session::get('userId')) : ?>
-    <script>
-        location.replace("login.php")
-    </script>
-<?php endif; ?>
 
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-12">
-            <h1>Historique de <?= Session::get('username') ?></h1>
-        </div>
+
+    
+    
         <div class="col-12 col-md-9 my-5">
             <?php foreach ($allMonths as $month => $e) : ?>
                 <h3><?= $month ?> | Total : <?= $e ?> €</h3>
