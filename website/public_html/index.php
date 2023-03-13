@@ -92,5 +92,4 @@ $recurentIncomesLeft = $incomeModel->getLeftRecurentIncomes();
                 <?php endif; ?>
                 </div>
     </div>
-</div>
-<?php require_once '../inc/footer.php' ?>
+    <?php require_once '../inc/footer.php' ?>
