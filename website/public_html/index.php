@@ -64,7 +64,7 @@ $recurentIncomesLeft = $incomeModel->getLeftRecurentIncomes();
             </div>
             <?php if ($recurentIncomesLeft) : ?>
                 <div>
-                    <h2>Renenus récurrents restants pour le mois actuel</h2>
+                    <h2>Revenus récurrents restants pour le mois actuel</h2>
                 </div>
                 <div class="col-12 col-md-9 my-5">
                     <table class="table">
