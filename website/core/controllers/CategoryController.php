@@ -18,4 +18,21 @@ class CategoryController
     {
         return $this->categoryModel->selectAll();
     }
+    
+
+    public function add(): bool
+    {
+        if (!isset($_POST["category_name"]) || empty($_POST["category_name"])) {
+            Session::set("error", "missing name !");
+            echo "o";
+            return false;
+        }
+
+        if ($this->categoryModel->create($_POST["category_name"])) {
+            header("Location: /categories/allCategories.php");
+            return true;
+        }
+
+        return false;
+    }
 }

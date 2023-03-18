@@ -67,7 +67,7 @@ $categoryController = new CategoryController();
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/categories/allCategories.php">All categories</a></li>
-                            <li><a class="dropdown-item" href="/addCategory.php">Add a category</a></li>
+                            <li><a class="dropdown-item" href="/categories/addCategory.php">Add a category</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

@@ -15,4 +15,11 @@ class Category
         $sql = "SELECT * FROM categories";
         return $this->db->read($sql);
     }
+
+    
+    public function create(string $name): bool
+    {
+        $sql = "INSERT INTO categories(name) VALUES(:name)";
+        return $this->db->write($sql, ["name" => $name]);
+    }
 }
