@@ -1,7 +1,6 @@
-<?php require_once('../../inc/header.php'); 
-$allCategories = $category->getAll();
+<?php require_once '../../inc/header.php';
+$categories = $categoryController->getAll();
 ?>
-
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-6">
@@ -14,16 +13,15 @@ $allCategories = $category->getAll();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($allCategories as $category): ?>
-                    <tr>
-                        <th scope="row"><?= $category->id_category ?></th>
-                        <td><?= $category->name ?></td>
-                    </tr>
-                   <?php endforeach; ?>
+                    <?php foreach ($categories as $category) : ?>
+                        <tr>
+                            <th scope="row"><?= $category->id_category ?></th>
+                            <td><?= $category->name ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-<?php require_once('../../inc/footer.php'); 
+<?php require_once '../../inc/footer.php';
