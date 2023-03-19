@@ -18,7 +18,7 @@ class CategoryController
     {
         return $this->categoryModel->selectAll();
     }
-    
+
 
     public function add(): bool
     {
@@ -29,6 +29,30 @@ class CategoryController
         }
 
         if ($this->categoryModel->create($_POST["category_name"])) {
+            header("Location: /categories/allCategories.php");
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public function getSingle(int $id): object
+    {
+        return $this->categoryModel->selectById($id);
+    }
+
+
+    public function edit(): bool
+    {
+        if (!isset($_POST["category_name"]) || empty($_POST["category_name"])) {
+            Session::set("error", "missing name !");
+            return false;
+        }
+
+        $data = ["id" => $_POST["category_id"], "name" => $_POST["category_name"]];
+
+        if ($this->categoryModel->update($data)) {
             header("Location: /categories/allCategories.php");
             return true;
         }
