@@ -10,6 +10,7 @@ $categories = $categoryController->getAll();
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,6 +18,7 @@ $categories = $categoryController->getAll();
                         <tr>
                             <th scope="row"><?= $category->id_category ?></th>
                             <td><?= $category->name ?></td>
+                            <td><a href="editCategory.php?id=<?= $category->id_category ?>" class="btn btn-primary">Edit</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
