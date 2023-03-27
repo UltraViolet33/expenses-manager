@@ -15,7 +15,7 @@ function getCategory(event) {
 function addCategory(categoryName) {
   const category = { name: categoryName };
 
-  fetch("addCategory.php", {
+  fetch("../categories/addCategoryAjax.php", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
