@@ -59,4 +59,10 @@ class CategoryController
 
         return false;
     }
+
+
+    public function delete(int $id): bool
+    {
+        return $this->categoryModel->delete($id);
+    }
 }

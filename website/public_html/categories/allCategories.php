@@ -11,6 +11,7 @@ $categories = $categoryController->getAll();
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +20,8 @@ $categories = $categoryController->getAll();
                             <th scope="row"><?= $category->id_category ?></th>
                             <td><?= $category->name ?></td>
                             <td><a href="editCategory.php?id=<?= $category->id_category ?>" class="btn btn-primary">Edit</a></td>
+                            <td><a href="deleteCategory.php?id=<?= $category->id_category ?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
+                        
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

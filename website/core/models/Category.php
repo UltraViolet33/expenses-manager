@@ -36,4 +36,11 @@ class Category
         $sql = "UPDATE categories SET name = :name WHERE id_category = :id";
         return $this->db->write($sql, $data);
     }
+
+    
+    public function delete(int $id): bool 
+    {
+        $sql = "DELETE FROM categories WHERE id_category = :id";
+        return $this->db->write($sql, ["id" => $id]);
+    }
 }
