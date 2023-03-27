@@ -1,7 +1,6 @@
-<?php require_once('../../inc/header.php'); 
-$allCategories = $category->getAll();
+<?php require_once '../../inc/header.php';
+$categories = $categoryController->getAll();
 ?>
-
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-6">
@@ -11,19 +10,23 @@ $allCategories = $category->getAll();
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($allCategories as $category): ?>
-                    <tr>
-                        <th scope="row"><?= $category->id_category ?></th>
-                        <td><?= $category->name ?></td>
-                    </tr>
-                   <?php endforeach; ?>
+                    <?php foreach ($categories as $category) : ?>
+                        <tr>
+                            <th scope="row"><?= $category->id_category ?></th>
+                            <td><?= $category->name ?></td>
+                            <td><a href="editCategory.php?id=<?= $category->id_category ?>" class="btn btn-primary">Edit</a></td>
+                            <td><a href="deleteCategory.php?id=<?= $category->id_category ?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
+                        
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-<?php require_once('../../inc/footer.php'); 
+<?php require_once '../../inc/footer.php';

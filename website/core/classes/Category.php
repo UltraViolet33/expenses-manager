@@ -3,7 +3,7 @@ require_once __DIR__ . "/../helpers/Helper.php";
 require_once __DIR__ . "/../connection/Database.php";
 require_once __DIR__ . "/../connection/Session.php";
 
-class Category
+class Categorys
 {
 
     private $db;
