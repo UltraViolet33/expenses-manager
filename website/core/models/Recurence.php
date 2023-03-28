@@ -1,12 +1,11 @@
 <?php
-require_once __DIR__ . "/../helpers/Helper.php";
+
 require_once __DIR__ . "/../connection/Database.php";
-require_once __DIR__ . "/../connection/Session.php";
 
-class Recurences
+
+class Recurence
 {
-
-    private $db;
+    private Database $db;
 
     public function __construct()
     {
@@ -14,7 +13,7 @@ class Recurences
     }
 
 
-    public function getAll()
+    public function selectAll(): array
     {
         $sql = "SELECT * FROM recurences";
         return $this->db->read($sql);

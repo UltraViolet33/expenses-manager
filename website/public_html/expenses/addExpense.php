@@ -1,12 +1,10 @@
 <?php require_once '../../inc/header.php';
 
+$script = "../assets/js/expenseForm.js";
+
 $categories = $categoryController->getAll();
 
-$script = "../assets/js/addCategory.js";
-
-// $script2 = "formRecurence.js";
-
-$allRecurences = $recurenceModel->getAll();
+$allRecurences = $recurenceController->getAll();
 
 // if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
@@ -41,9 +39,7 @@ $allRecurences = $recurenceModel->getAll();
                     <input type="text" id="category_name" name="category_name" class="form-control">
                 </div>
                 <button id="btn-submit-cat" class="btn btn-primary">Valider</button>
-                <p id="message">
-
-                </p>
+                <p id="message"></p>
             </form>
         </div>
         <div class="col-12 col-md-8">
