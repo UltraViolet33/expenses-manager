@@ -49,7 +49,7 @@ $categoryController = new CategoryController();
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/allExpenses.php">All expenses</a></li>
-                            <li><a class="dropdown-item" href="/addExpense.php">Add an expense</a></li>
+                            <li><a class="dropdown-item" href="/expenses/addExpense.php">Add an expense</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

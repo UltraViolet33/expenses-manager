@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . "/../connection/Database.php";
+
+
 class Category
 {
     private Database $db;
@@ -23,6 +26,13 @@ class Category
         return $this->db->readOneRow($sql, ["id" => $id]);
     }
 
+    
+    public function selectByName(string $name): object|bool 
+    {
+        $sql = "SELECT * FROM categories WHERE name = :name";
+        return $this->db->readOneRow($sql, ["name" => $name]);
+    }
+
 
     public function create(string $name): bool
     {
@@ -37,7 +47,7 @@ class Category
         return $this->db->write($sql, $data);
     }
 
-    
+
     public function delete(int $id): bool 
     {
         $sql = "DELETE FROM categories WHERE id_category = :id";

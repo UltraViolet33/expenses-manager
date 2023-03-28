@@ -41,9 +41,9 @@ $allRecurences = $recurenceModel->getAll();
                     <input type="text" id="category_name" name="category_name" class="form-control">
                 </div>
                 <button id="btn-submit-cat" class="btn btn-primary">Valider</button>
-                <div id="message">
+                <p id="message">
 
-                </div>
+                </p>
             </form>
         </div>
         <div class="col-12 col-md-8">
