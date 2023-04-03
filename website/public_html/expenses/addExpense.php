@@ -1,33 +1,12 @@
-<?php require_once '../inc/header.php';
+<?php require_once '../../inc/header.php';
 
-$categories = $category->getAll();
-$script = "addCategory.js";
+$script = "../assets/js/expenseForm.js";
 
-$script2 = "formRecurence.js";
-
-$allRecurences = $recurenceModel->getAll();
+$categories = $categoryController->getAll();
+$allRecurences = $recurenceController->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-
-
-    $data = [];
-
-    if (isset($_POST['recurrence'])) {
-        $data['created_at'] = Date('Y-m-d');
-        $data['id_recurence'] = $_POST['period'];
-        $data['status'] = 0;
-    } else {
-        $data['created_at'] = $_POST['created_at'];
-        $data['id_recurence'] = null;
-        $data['status'] = null;
-
-    }
-
-    $data['name'] = $format->validation($_POST['name']);
-    $data['amount'] = $format->validation($_POST['amount']);
-    $data['id_category'] = $format->validation($_POST['category']);
-    $expense->create($data);
-    echo "<script>location.replace('/')</script>";
+    $expenseController->add();
 }
 ?>
 <div class="container my-5">
@@ -40,16 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <input type="text" id="category_name" name="category_name" class="form-control">
                 </div>
                 <button id="btn-submit-cat" class="btn btn-primary">Valider</button>
-                <div id="message">
-
-                </div>
+                <p id="message"></p>
             </form>
         </div>
         <div class="col-12 col-md-8">
             <h1>Ajouter une dépense</h1>
             <form action="" method="POST">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Nom</label>
+                    <label for="name" class="form-label">Nom</label>            
                     <input type="text" name="name" class="form-control">
                 </div>
                 <div class="mb-3">
@@ -82,7 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 </div>
                 <button class="btn btn-primary">Valider</button>
             </form>
+            <div class="bg-danger">
+                <?php
+                echo Session::get("error");
+                Session::unsetKey("error");
+                ?>
+            </div>
         </div>
     </div>
 </div>
-<?php require_once '../inc/footer.php' ?>
+<?php require_once '../../inc/footer.php' ?>

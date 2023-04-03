@@ -38,7 +38,7 @@ class Database
     }
 
 
-    public function read($query, array $data = [])
+    public function read($query, array $data = []): array
     {
         $this->getConnection();
 
@@ -53,7 +53,7 @@ class Database
         }
 
         $this->closeConnection();
-        return false;
+        return [];
     }
 
     public function write($query, $data = array())

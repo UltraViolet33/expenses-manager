@@ -19,19 +19,30 @@ class CategoryController
         return $this->categoryModel->selectAll();
     }
 
+    public function add(string $name): bool
+    {
+        $checkIfExists = $this->categoryModel->selectByName($name);
+        if (!$checkIfExists) {
+            return $this->categoryModel->create($name);
+        }
 
-    public function add(): bool
+        return false;
+    }
+
+
+    public function addFromForm(): bool
     {
         if (!isset($_POST["category_name"]) || empty($_POST["category_name"])) {
             Session::set("error", "missing name !");
-            echo "o";
             return false;
         }
 
-        if ($this->categoryModel->create($_POST["category_name"])) {
+        if ($this->add($_POST["category_name"])) {
             header("Location: /categories/allCategories.php");
             return true;
         }
+
+        Session::set("error", "Name already exists !");
 
         return false;
     }
@@ -64,5 +75,11 @@ class CategoryController
     public function delete(int $id): bool
     {
         return $this->categoryModel->delete($id);
+    }
+
+
+    public function addFromAjax(array $data): bool
+    {
+        return $this->add($data["name"]);
     }
 }

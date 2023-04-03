@@ -4,7 +4,7 @@ require_once __DIR__ . "/../connection/Database.php";
 require_once __DIR__ . "/../connection/Session.php";
 
 
-class Expense
+class Expenses
 {
 
     private $helper;
@@ -46,12 +46,12 @@ class Expense
 
     public function getRecurentExpenses()
     {
-        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, 
-        categories.name AS category_name, recurences.period FROM expenses AS ex
-        INNER JOIN categories ON ex.id_category = categories.id_category  
-        INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence
-        WHERE ex.id_recurence IS NOT NULL ORDER BY ex.created_at DESC LIMIT 10 ";
-        return $this->db->read($sql);
+        // $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, 
+        // categories.name AS category_name, recurences.period FROM expenses AS ex
+        // INNER JOIN categories ON ex.id_category = categories.id_category  
+        // INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence
+        // WHERE ex.id_recurence IS NOT NULL ORDER BY ex.created_at DESC LIMIT 10 ";
+        // return $this->db->read($sql);
     }
 
 
