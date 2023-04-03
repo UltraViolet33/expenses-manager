@@ -13,6 +13,42 @@ class ExpenseController
         $this->expenseModel = new Expense();
     }
 
+    public function getSingleExpense(int $id)
+    {
+        return $this->expenseModel->selectExpenseById($id);
+    }
+
+
+    public function edit(int $id)
+    {
+        $dataToCheck = ["name", "amount", "category"];
+
+        if ($this->checkPostValues($dataToCheck)) {
+
+            $data['created_at'] = Date('Y-m-d');
+
+            if (isset($_POST['recurrence'])) {
+                $data['id_recurence'] = $_POST['period'];
+            } else {
+                $data['id_recurence'] = null;
+            }
+
+            $data['name'] = $_POST['name'];
+            $data['amount'] = $_POST['amount'];
+            $data['id_category'] = $_POST['category'];
+            $data['id_expense'] = $id;
+
+            $this->expenseModel->update($data);
+            header("Location: /expenses/allExpenses.php");
+            Session::set("message", "OK !");
+
+            return true;
+        }
+
+        Session::set("error", "missing fields !");
+        return false;
+    }
+
 
     public function add()
     {

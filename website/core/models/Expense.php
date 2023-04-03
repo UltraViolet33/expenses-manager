@@ -19,7 +19,18 @@ class Expense
         return $this->db->read($sql);
     }
 
-    
+
+    public function selectExpenseById(int $id)
+    {
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.id_recurence, ex.created_at, 
+        categories.name AS category_name, categories.id_category FROM expenses AS ex 
+        INNER JOIN categories ON ex.id_category = categories.id_category 
+        WHERE id_expense = :id_expense";
+
+        return $this->db->readOneRow($sql, ["id_expense" => $id]);
+    }
+
+
     public function create(array $data)
     {
         // var_dump($data);
@@ -40,7 +51,7 @@ class Expense
     }
 
 
-    public function selectRecurentExpenses(): array 
+    public function selectRecurentExpenses(): array
     {
         $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, 
         categories.name AS category_name, recurences.period FROM expenses AS ex
@@ -52,11 +63,19 @@ class Expense
     }
 
 
-    public function selectNonRecurenceExpenses(): array 
+    public function selectNonRecurenceExpenses(): array
     {
         $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, 
         ex.created_at FROM expenses AS ex WHERE ex.id_recurence IS NULL";
-        
+
         return $this->db->read($sql);
+    }
+
+
+    public function update(array $data)
+    {
+        $sql = "UPDATE expenses SET name = :name, amount = :amount, created_at = :created_at, 
+        id_recurence = :id_recurence, id_category = :id_category WHERE id_expense = :id_expense";
+        return $this->db->write($sql, $data);
     }
 }
