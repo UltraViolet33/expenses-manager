@@ -108,4 +108,10 @@ class ExpenseController
     {
         return $this->expenseModel->selectNonRecurenceExpenses();
     }
+
+
+    public function delete(int $id)
+    {
+        return $this->expenseModel->delete($id);
+    }
 }

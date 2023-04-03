@@ -78,4 +78,11 @@ class Expense
         id_recurence = :id_recurence, id_category = :id_category WHERE id_expense = :id_expense";
         return $this->db->write($sql, $data);
     }
+
+
+    public function delete(int $id)
+    {
+        $sql = "DELETE FROM expenses WHERE id_expense = :id_expense";
+        return $this->db->write($sql, ["id_expense" => $id]);
+    }
 }
