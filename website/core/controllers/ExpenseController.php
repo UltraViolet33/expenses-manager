@@ -26,8 +26,7 @@ class ExpenseController
                 $data['status'] = 0;
             } else {
 
-                if(isset($_POST["created_at"]) && !empty($_POST["created_at"]))
-                {
+                if (isset($_POST["created_at"]) && !empty($_POST["created_at"])) {
                     $data['created_at'] = $_POST['created_at'];
                 }
 
@@ -40,7 +39,7 @@ class ExpenseController
             $data['id_category'] = $_POST['category'];
 
             $this->expenseModel->create($data);
-            // header("Location: /expenses/allExpenses.php");
+            header("Location: /expenses/allExpenses.php");
             Session::set("message", "OK !");
 
             return true;
@@ -60,5 +59,17 @@ class ExpenseController
         }
 
         return true;
+    }
+
+
+    public function getAllRecurentExpenses(): array
+    {
+        return $this->expenseModel->selectRecurentExpenses();
+    }
+
+
+    public function getNonRecurentExpenses(): array
+    {
+        return $this->expenseModel->selectNonRecurenceExpenses();
     }
 }
