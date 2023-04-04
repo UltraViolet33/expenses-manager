@@ -13,6 +13,14 @@ class IncomeController
         $this->incomeModel = new Income();
     }
 
+    public function getAllIncomes(): array
+    {
+        $allRecurentIncomes = $this->incomeModel->selectRecurentIncomes();
+        $nonRecurentIncomes = $this->incomeModel->selectNonRecurentIncomes();
+
+        return [$nonRecurentIncomes, $allRecurentIncomes];
+    }
+
 
     public function add()
     {

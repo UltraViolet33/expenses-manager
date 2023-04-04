@@ -36,20 +36,20 @@ class Income
     // }
 
 
-    public function selectRecurentIncomes()
-    {
-        $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at, recurences.period FROM incomes AS inc 
-        INNER JOIN recurences ON recurences.id_recurence = inc.id_recurence WHERE inc.id_recurence IS NOT NULL;";
+    // public function selectRecurentIncomes()
+    // {
+    //     $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at, recurences.period FROM incomes AS inc 
+    //     INNER JOIN recurences ON recurences.id_recurence = inc.id_recurence WHERE inc.id_recurence IS NOT NULL;";
 
-        return $this->db->read($sql);
-    }
+    //     return $this->db->read($sql);
+    // }
 
 
-    public function selectIncomes()
-    {
-        $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at FROM incomes AS inc WHERE inc.id_recurence IS  NULL;";
-        return $this->db->read($sql);
-    }
+    // public function selectIncomes()
+    // {
+    //     $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at FROM incomes AS inc WHERE inc.id_recurence IS  NULL;";
+    //     return $this->db->read($sql);
+    // }
 
 
     public function getSingleRecurentIncome($id)
