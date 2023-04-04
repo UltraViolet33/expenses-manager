@@ -4,7 +4,7 @@ Session::init();
 // require_once __DIR__ . '/../core/classes/Category.php';
 // require_once __DIR__ . '/../core/classes/Recurence.php';
 // require_once __DIR__ . '/../core/classes/Expense.php';
-require_once __DIR__ . '/../core/classes/Income.php';
+// require_once __DIR__ . '/../core/classes/Income.php';
 require_once __DIR__ . '/../core/helpers/Format.php';
 require_once __DIR__ . '/../core/helpers/Helper.php';
 
@@ -13,7 +13,7 @@ define('ROOT', "/public_html");
 // $category = new Category();
 // $recurenceModel = new Recurence();
 // $expense = new Expense();
-$incomeModel = new Income();
+// $incomeModel = new Income();
 $format = new Format();
 $helperClass = new Helper();
 
@@ -28,6 +28,10 @@ $recurenceController = new RecurenceController();
 
 require_once __DIR__ . '/../core/controllers/ExpenseController.php';
 $expenseController = new ExpenseController();
+
+
+require_once __DIR__ . '/../core/controllers/IncomeController.php';
+$incomeController = new IncomeController();
 
 ?>
 <!DOCTYPE html>
@@ -65,8 +69,8 @@ $expenseController = new ExpenseController();
                             Incomes
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./allIncomes.php">All incomes</a></li>
-                            <li><a class="dropdown-item" href="./addIncome.php">Add an income</a></li>
+                            <li><a class="dropdown-item" href="/incomes/allIncomes.php">All incomes</a></li>
+                            <li><a class="dropdown-item" href="/incomes/addIncome.php">Add an income</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

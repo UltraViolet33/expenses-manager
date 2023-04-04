@@ -1,27 +1,30 @@
-<?php require_once '../inc/header.php';
+<?php require_once '../../inc/header.php';
 
-$script = "formRecurence.js";
+$script = "../assets/js/formRecurence.js";
 
-$allRecurences = $recurenceModel->getAll();
+$allRecurences = $recurenceController->getAll();
+
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $data = [];
-    $data['name'] = $format->validation($_POST['name']);
-    $data['amount'] = $format->validation($_POST['amount']);
+    $incomeController->add();
 
-    if (isset($_POST['recurrence'])) {
-        $data['id_recurence'] = $_POST['period'];
-        $data['created_at'] = Date('Y-m-d');
-        $data['status'] = 0;
-    } else {
-        $data['id_recurence'] = null;
-        $data['created_at'] = $format->validation($_POST['created_at']);
-        $data['status'] = null;
-    }
+    // $data = [];
+    // $data['name'] = $format->validation($_POST['name']);
+    // $data['amount'] = $format->validation($_POST['amount']);
 
-    $incomeModel->create($data);
-    header("Location: allIncomes.php");
+    // if (isset($_POST['recurrence'])) {
+    //     $data['id_recurence'] = $_POST['period'];
+    //     $data['created_at'] = Date('Y-m-d');
+    //     $data['status'] = 0;
+    // } else {
+    //     $data['id_recurence'] = null;
+    //     $data['created_at'] = $format->validation($_POST['created_at']);
+    //     $data['status'] = null;
+    // }
+
+    // $incomeModel->create($data);
+    // header("Location: allIncomes.php");
 }
 ?>
 
@@ -60,4 +63,4 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         </div>
     </div>
 </div>
-<?php require_once '../inc/footer.php' ?>
+<?php require_once '../../inc/footer.php' ?>
