@@ -31,8 +31,8 @@ $otherIncomes = $allIncomes[0];
                                 <td><?= $income->amount ?> €</td>
                                 <td><?= $income->period ?></td>
                                 <td><?= $income->created_at ?></td>
-                                <td><a href="editIncome.php?id=<?= $income->id_income ?>" class="btn btn-primary">Edit</a></td>
-                                <td><a href="deleteIncome.php?id=<?= $income->id_income ?>" class="btn btn-danger" onclick="return confirm('Do you really want to delete this expense ?')">Delete</a></td>
+                                <td><a href="/incomes/editIncome.php?id=<?= $income->id_income ?>" class="btn btn-primary">Edit</a></td>
+                                <td><a href="/incomes/deleteIncome.php?id=<?= $income->id_income ?>" class="btn btn-danger" onclick="return confirm('Do you really want to delete this expense ?')">Delete</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -21,6 +21,11 @@ class IncomeController
         return [$nonRecurentIncomes, $allRecurentIncomes];
     }
 
+    public function getSingleIncome(int $id)
+    {
+        return $this->incomeModel->selectSingleIncome($id);
+    }
+
 
     public function add()
     {
@@ -48,6 +53,42 @@ class IncomeController
 
             $this->incomeModel->create($data);
             // header("Location: /incomes/allIncomes.php");
+            Session::set("message", "OK !");
+
+            return true;
+        }
+
+        Session::set("error", "missing fields !");
+        return false;
+    }
+
+
+    public function edit(int $id)
+    {
+        $dataToCheck = ["name", "amount"];
+
+        if ($this->checkPostValues($dataToCheck)) {
+
+            // $data['created_at'] = Date('Y-m-d');
+            $data['created_at'] = Date('Y-m-d');
+
+            if (isset($_POST['recurrence'])) {
+                $data['id_recurence'] = $_POST['period'];
+            } else {
+
+                if (isset($_POST["created_at"]) && !empty($_POST["created_at"])) {
+                    $data['created_at'] = $_POST['created_at'];
+                }
+
+                $data['id_recurence'] = null;
+            }
+
+            $data['name'] = $_POST['name'];
+            $data['amount'] = $_POST['amount'];
+            $data["id_income"] = $id;
+
+            $this->incomeModel->update($data);
+            header("Location: /incomes/allIncomes.php");
             Session::set("message", "OK !");
 
             return true;

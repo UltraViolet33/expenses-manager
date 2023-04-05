@@ -43,4 +43,21 @@ class Income
         $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at FROM incomes AS inc WHERE inc.id_recurence IS  NULL;";
         return $this->db->read($sql);
     }
+
+
+    public function selectSingleIncome($id)
+    {
+        $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at, inc.id_recurence FROM incomes AS inc 
+       WHERE inc.id_income = :id_income";
+
+        return $this->db->readOneRow($sql, ["id_income" => $id]);
+    }
+
+        
+    public function update(array $data)
+    {
+        var_dump($data);
+        $sql = "UPDATE incomes SET name = :name, amount = :amount, created_at = :created_at, id_recurence = :id_recurence WHERE id_income = :id_income";
+        return $this->db->write($sql, $data);
+    }
 }
