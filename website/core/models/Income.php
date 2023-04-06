@@ -53,7 +53,13 @@ class Income
         return $this->db->readOneRow($sql, ["id_income" => $id]);
     }
 
-        
+    public function delete($id)
+    {
+        $sql = "DELETE FROM incomes WHERE id_income = :id_income";
+        return $this->db->write($sql, ["id_income" => $id]);
+    }
+
+
     public function update(array $data)
     {
         var_dump($data);

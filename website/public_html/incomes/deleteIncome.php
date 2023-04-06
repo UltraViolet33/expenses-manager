@@ -1,10 +1,11 @@
-<?php require_once '../inc/header.php';
+<?php require_once '../../inc/header.php';
 
 
 if (!isset($_GET['id'])) {
-    header("Location: index.php");
+    header("Location: /incomes/allIncomes.php");
 }
 
-$incomeModel->delete($_GET["id"]);
 
-header("Location: allIncomes.php");
+$incomeController->delete($_GET["id"]);
+
+header("Location: /incomes/allIncomes.php");

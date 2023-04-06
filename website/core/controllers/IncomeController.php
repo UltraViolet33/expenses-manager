@@ -13,6 +13,12 @@ class IncomeController
         $this->incomeModel = new Income();
     }
 
+
+    public function delete(int $id)
+    {
+        $this->incomeModel->delete($id);
+    }
+
     public function getAllIncomes(): array
     {
         $allRecurentIncomes = $this->incomeModel->selectRecurentIncomes();
@@ -21,10 +27,12 @@ class IncomeController
         return [$nonRecurentIncomes, $allRecurentIncomes];
     }
 
+
     public function getSingleIncome(int $id)
     {
         return $this->incomeModel->selectSingleIncome($id);
     }
+
 
 
     public function add()
