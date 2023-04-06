@@ -117,4 +117,14 @@ class IncomeController
 
         return true;
     }
+
+    public function resetStatusRecurentIncomes()
+    {
+        return $this->incomeModel->resetStatusRecurentIncomes();
+    }
+
+    public function getLeftRecurentIncomes()
+    {
+        return $this->incomeModel->getLeftRecurentIncomes();
+    }
 }

@@ -66,4 +66,17 @@ class Income
         $sql = "UPDATE incomes SET name = :name, amount = :amount, created_at = :created_at, id_recurence = :id_recurence WHERE id_income = :id_income";
         return $this->db->write($sql, $data);
     }
+
+    public function resetStatusRecurentIncomes()
+    {
+        $sql = "UPDATE incomes SET status = 0 WHERE id_recurence IS NOT NULL";
+        $this->db->write($sql);
+    }
+
+    public function getLeftRecurentIncomes()
+    {
+        $sql = "SELECT id_income, name, amount FROM incomes
+        WHERE id_recurence IS NOT NULL AND status = 0";
+        return $this->db->read($sql);
+    }
 }

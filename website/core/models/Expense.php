@@ -86,13 +86,28 @@ class Expense
         return $this->db->write($sql, ["id_expense" => $id]);
     }
 
-    
+
     public function selectExpensesGroupByMonthAndCategory()
     {
         $sql = "SELECT DATE_FORMAT(ex.created_at, '%M %Y') AS month, ex.id_category, 
         cat.name AS category_name,  SUM(ex.amount) AS total_expenses FROM expenses AS ex 
         INNER JOIN categories AS cat ON cat.id_category = ex.id_category WHERE ex.id_recurence IS NULL
         GROUP BY DATE_FORMAT(ex.created_at, '%M %Y'), ex.id_category  ORDER BY STR_TO_DATE(CONCAT( month, ' 01'), '%M %Y %d') DESC";
+        return $this->db->read($sql);
+    }
+
+
+    public function resetStatusRecurentExpenses()
+    {
+        $sql = "UPDATE expenses SET status = 0 WHERE id_recurence IS NOT NULL";
+        return $this->db->write($sql);
+    }
+
+    public function getLeftRecurentExpenses()
+    {
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount FROM expenses AS ex
+        INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence
+        WHERE ex.id_recurence IS NOT NULL AND ex.status = 0";
         return $this->db->read($sql);
     }
 }

@@ -119,4 +119,15 @@ class ExpenseController
     {
         return $this->expenseModel->selectExpensesGroupByMonthAndCategory();
     }
+
+
+    public function resetStatusRecurentExpenses()
+    {
+        return $this->expenseModel->resetStatusRecurentExpenses();
+    }
+
+    public function getLeftRecurentExpenses()
+    {
+        return $this->expenseModel->getLeftRecurentExpenses();
+    }
 }
