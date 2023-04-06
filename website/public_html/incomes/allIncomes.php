@@ -1,6 +1,8 @@
-<?php require_once '../inc/header.php';
-$recurentIncomes = $incomeModel->selectRecurentIncomes();
-$otherIncomes = $incomeModel->selectIncomes();
+<?php require_once '../../inc/header.php';
+
+$allIncomes = $incomeController->getAllIncomes();
+$recurentIncomes = $allIncomes[1];
+$otherIncomes = $allIncomes[0];
 ?>
 <div class="container my-5">
     <div class="row justify-content-center">
@@ -26,11 +28,11 @@ $otherIncomes = $incomeModel->selectIncomes();
                             <tr>
                                 <th scope="row"><?= $income->id_income ?></th>
                                 <td><?= $income->income_name ?></td>
-                                <td><?= $income->amount ?></td>
+                                <td><?= $income->amount ?> €</td>
                                 <td><?= $income->period ?></td>
                                 <td><?= $income->created_at ?></td>
-                                <td><a href="editIncome.php?id=<?= $income->id_income ?>" class="btn btn-primary">Edit</a></td>
-                                <td><a href="deleteIncome.php?id=<?= $income->id_income ?>" class="btn btn-danger" onclick="return confirm('Do you really want to delete this expense ?')">Delete</a></td>
+                                <td><a href="/incomes/editIncome.php?id=<?= $income->id_income ?>" class="btn btn-primary">Edit</a></td>
+                                <td><a href="/incomes/deleteIncome.php?id=<?= $income->id_income ?>" class="btn btn-danger" onclick="return confirm('Do you really want to delete this expense ?')">Delete</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -60,7 +62,7 @@ $otherIncomes = $incomeModel->selectIncomes();
                             <tr>
                                 <th scope="row"><?= $income->id_income ?></th>
                                 <td><?= $income->income_name ?></td>
-                                <td><?= $income->amount ?></td>
+                                <td><?= $income->amount ?> €</td>
                                 <td><?= $income->created_at ?></td>
                                 <td><a href="editIncome.php?id=<?= $income->id_income ?>" class="btn btn-primary">Edit</a></td>
                                 <td><a href="deleteIncome.php?id=<?= $income->id_income ?>" class="btn btn-danger" onclick="return confirm('Do you really want to delete this expense ?')">Delete</a></td>
@@ -74,4 +76,4 @@ $otherIncomes = $incomeModel->selectIncomes();
         </div>
     </div>
 </div>
-<?php require_once '../inc/footer.php' ?>
+<?php require_once '../../inc/footer.php' ?>
