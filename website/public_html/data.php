@@ -1,6 +1,6 @@
 <?php require_once '../inc/header.php';
 
-$allExpenses = $expense->selectExpensesGroupByMonthAndCategory();
+$allExpenses = $expenseController->getExpensesGroupByMonthAndCategory();
 $allMonths = [];
 if ($allExpenses) {
 
@@ -18,10 +18,7 @@ if ($allExpenses) {
         }
     }
 }
-
 ?>
-
-
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 my-5">

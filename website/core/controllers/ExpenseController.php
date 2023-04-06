@@ -114,4 +114,9 @@ class ExpenseController
     {
         return $this->expenseModel->delete($id);
     }
+
+    public function getExpensesGroupByMonthAndCategory()
+    {
+        return $this->expenseModel->selectExpensesGroupByMonthAndCategory();
+    }
 }

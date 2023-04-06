@@ -83,7 +83,7 @@ $incomeController = new IncomeController();
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./data.php">Historique</a>
+                        <a class="nav-link" href="/data.php">Historique</a>
                     </li>
                 </ul>
             </div>
