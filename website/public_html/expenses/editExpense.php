@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <?php else : ?>
                     <div class="mb-3" id="date">
                         <label for="created_at" class="form-label">Date</label>
-                        <input type="date" name="created_at" class="form-control">
+                        <input type="date" name="created_at" class="form-control" value="<?= $singleExpense->created_at?>">
                     </div>
                 <?php endif; ?>
                 <div class="mb-3">

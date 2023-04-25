@@ -19,6 +19,7 @@ $nonRecurentExpenses = $expenseController->getNonRecurentExpenses();
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Category</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Period</th>
                             <th scope="col">Date</th>
@@ -31,6 +32,7 @@ $nonRecurentExpenses = $expenseController->getNonRecurentExpenses();
                             <tr>
                                 <th scope="row"><?= $expense->id_expense ?></th>
                                 <td><?= $expense->expense_name ?></td>
+                                <td><?= $expense->category_name ?></td>
                                 <td><?= $expense->amount ?> €</td>
                                 <td><?= $expense->period ?></td>
                                 <td><?= $expense->created_at ?></td>
@@ -54,6 +56,7 @@ $nonRecurentExpenses = $expenseController->getNonRecurentExpenses();
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Category</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Date</th>
                             <th scope="col">Edit</th>
@@ -65,6 +68,7 @@ $nonRecurentExpenses = $expenseController->getNonRecurentExpenses();
                             <tr>
                                 <th scope="row"><?= $expense->id_expense ?></th>
                                 <td><?= $expense->expense_name ?></td>
+                                <td><?= $expense->category_name ?></td>
                                 <td><?= $expense->amount ?> €</td>
                                 <td><?= $expense->created_at ?></td>
                                 <td><a href="editExpense.php?id=<?= $expense->id_expense ?>" class="btn btn-primary">Edit</a></td>

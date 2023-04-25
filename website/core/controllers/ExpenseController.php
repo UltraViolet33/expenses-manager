@@ -25,7 +25,7 @@ class ExpenseController
 
         if ($this->checkPostValues($dataToCheck)) {
 
-            $data['created_at'] = Date('Y-m-d');
+            $data['created_at'] = $_POST['created_at'];
 
             if (isset($_POST['recurrence'])) {
                 $data['id_recurence'] = $_POST['period'];

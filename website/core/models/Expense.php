@@ -63,8 +63,8 @@ class Expense
 
     public function selectNonRecurenceExpenses(): array
     {
-        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, 
-        ex.created_at FROM expenses AS ex WHERE ex.id_recurence IS NULL";
+        $sql = "SELECT cat.name AS category_name, ex.id_expense, ex.name AS expense_name, ex.amount, 
+        ex.created_at FROM expenses AS ex JOIN categories AS cat ON ex.id_category = cat.id_category WHERE ex.id_recurence IS NULL ORDER BY ex.created_at DESC";
 
         return $this->db->read($sql);
     }
