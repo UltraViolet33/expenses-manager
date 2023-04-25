@@ -2,12 +2,17 @@
 
 $allIncomes = $incomeController->getAllIncomes();
 $recurentIncomes = $allIncomes[1];
+$totalRecurent = 0;
+foreach ($recurentIncomes as $income) {
+    $totalRecurent += $income->amount;
+}
 $otherIncomes = $allIncomes[0];
+
 ?>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div>
-            <h2>Revenus récurrents</h2>
+            <h2>Revenus récurrents : <?= $totalRecurent ?> €</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
             <?php if ($recurentIncomes) : ?>

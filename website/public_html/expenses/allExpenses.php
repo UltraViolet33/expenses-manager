@@ -1,12 +1,16 @@
 <?php require_once '../../inc/header.php';
 
 $recurentExpenses = $expenseController->getAllRecurentExpenses();
+$totalRecurent = 0;
+foreach ($recurentExpenses as $expense) {
+    $totalRecurent += $expense->amount;
+}
 $nonRecurentExpenses = $expenseController->getNonRecurentExpenses();
 ?>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div>
-            <h2>Dépenses récurrentes</h2>
+            <h2>Dépenses récurrentes : <?= $totalRecurent ?> €</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
             <?php if ($recurentExpenses) : ?>

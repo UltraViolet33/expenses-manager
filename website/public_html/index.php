@@ -29,11 +29,15 @@ if ($actualMonth > $monthDB->actual_month) {
 $recurentExpenseLeft = $expenseController->getLeftRecurentExpenses();
 $recurentIncomesLeft = $incomeController->getLeftRecurentIncomes();
 
+
+$balance  = $expenseController->getBalance();
+
 ?>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12">
             <h1>Portefeuille : <?= $wallet->amount ?> €</h1>
+            <h2>Balance : <?= $balance ?> €</h2>
         </div>
         <?php if ($recurentExpenseLeft) : ?>
             <div>
@@ -55,7 +59,7 @@ $recurentIncomesLeft = $incomeController->getLeftRecurentIncomes();
                                 <th scope="row"><?= $expense->id_expense ?></th>
                                 <td><?= $expense->expense_name ?></td>
                                 <td><?= $expense->amount ?></td>
-                                <td><a href="validateExpense.php?id=<?= $expense->id_expense ?>" class="btn btn-primary">Valider</a></td>
+                                <td><a href="expenses/validateExpense.php?id=<?= $expense->id_expense ?>" class="btn btn-primary">Valider</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

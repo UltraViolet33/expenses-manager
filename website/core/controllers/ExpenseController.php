@@ -130,4 +130,45 @@ class ExpenseController
     {
         return $this->expenseModel->getLeftRecurentExpenses();
     }
+
+    public function getBalance()
+    {
+        $recurentExpenses = $this->getAllRecurentExpenses();
+        $recurentIncomes = (new IncomeController())->getAllIncomes()[1];
+
+        $totalExpenses = 0;
+        $totalIncomes = 0;
+
+        foreach ($recurentExpenses as $expense) {
+            $totalExpenses += $expense->amount;
+        }
+
+        foreach ($recurentIncomes as $income) {
+            $totalIncomes += $income->amount;
+        }
+
+        $balance = $totalIncomes - $totalExpenses;
+
+        $balance = $balance > 0 ? "+ " . $balance : $balance;
+
+        return $balance;
+    }
+
+    public function validateExpense(array $data)
+    {
+        $this->expenseModel->validate($data);
+
+        // create expense
+
+        $expense = $this->getSingleExpense($data["id_expense"]);
+
+
+        $newExpense = [
+            "name" => $expense->expense_name, "amount" => $expense->amount,
+            "created_at" => Date('Y-m-d'), "id_category" => $expense->id_category,
+            "id_recurence" => null, "status" => null
+        ];
+
+        $this->expenseModel->create($newExpense);
+    }
 }

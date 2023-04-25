@@ -41,13 +41,11 @@ class Expense
 
         $this->db->write($sql, $data);
 
-        //  if($data['id_recurence'] == null)
-        //  {
-        //     $sql = "UPDATE wallet SET amount = amount - :expense ORDER BY id DESC LIMIT 1";
+        if ($data['id_recurence'] == null) {
+            $sql = "UPDATE wallet SET amount = amount - :expense ORDER BY id DESC LIMIT 1";
 
-        //     $this->db->write($sql, ["expense" => $data['amount']]);
-
-        //  }
+            $this->db->write($sql, ["expense" => $data['amount']]);
+        }
     }
 
 
@@ -109,5 +107,12 @@ class Expense
         INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence
         WHERE ex.id_recurence IS NOT NULL AND ex.status = 0";
         return $this->db->read($sql);
+    }
+
+
+    public function validate(array $data)
+    {
+        $sql = "UPDATE expenses SET status = 1 WHERE id_expense = :id_expense";
+        return $this->db->write($sql, $data);
     }
 }
