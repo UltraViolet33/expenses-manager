@@ -127,4 +127,22 @@ class IncomeController
     {
         return $this->incomeModel->getLeftRecurentIncomes();
     }
+
+    public function validateIncome(array $data)
+    {
+        $this->incomeModel->validate($data);
+
+        // create income
+
+        $income = $this->getSingleIncome($data["id_income"]);
+
+
+        $newIncome = [
+            "name" => $income->income_name, "amount" => $income->amount,
+            "created_at" => Date('Y-m-d'),
+            "id_recurence" => null, "status" => null
+        ];
+
+        $this->incomeModel->create($newIncome);
+    }
 }

@@ -88,7 +88,7 @@ $balance  = $expenseController->getBalance();
                                     <th scope="row"><?= $income->id_income ?></th>
                                     <td><?= $income->name ?></td>
                                     <td><?= $income->amount ?></td>
-                                    <td><a href="validateIncome.php?id=<?= $income->id_income ?>" class="btn btn-primary">Valider</a></td>
+                                    <td><a href="incomes/validateIncome.php?id=<?= $income->id_income ?>" class="btn btn-primary">Valider</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

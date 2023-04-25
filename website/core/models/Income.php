@@ -19,13 +19,11 @@ class Income
         $this->db->write($sql, $data);
 
 
-        // if($data['id_recurence'] == null)
-        // {
-        //    $sql = "UPDATE wallet SET amount = amount + :income ORDER BY id DESC LIMIT 1";
+        if ($data['id_recurence'] == null) {
+            $sql = "UPDATE wallet SET amount = amount + :income ORDER BY id DESC LIMIT 1";
 
-        //    $this->db->write($sql, ["income" => $data['amount']]);
-
-        // }
+            $this->db->write($sql, ["income" => $data['amount']]);
+        }
     }
 
 
@@ -78,5 +76,12 @@ class Income
         $sql = "SELECT id_income, name, amount FROM incomes
         WHERE id_recurence IS NOT NULL AND status = 0";
         return $this->db->read($sql);
+    }
+
+
+    public function validate($data)
+    {
+        $sql = "UPDATE incomes SET status = 1 WHERE id_income = :id_income";
+        return $this->db->write($sql, $data);
     }
 }
