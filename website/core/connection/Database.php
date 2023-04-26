@@ -17,6 +17,7 @@ class Database
     {
         $string = "mysql:host=" . HOST . ";dbname=" . DBNAME;
         $this->pdoInstance =  new PDO($string, USERNAME, PASSWORD);
+        $this->pdoInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
 

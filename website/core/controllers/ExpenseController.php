@@ -183,4 +183,9 @@ class ExpenseController
 
         $this->expenseModel->create($newExpense);
     }
+
+    public function getExpensesByMonth(int $month)
+    {
+        return $this->expenseModel->getExpensesByMonth($month);
+    }
 }
