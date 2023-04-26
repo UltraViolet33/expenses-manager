@@ -6,6 +6,11 @@ foreach ($recurentExpenses as $expense) {
     $totalRecurent += $expense->amount;
 }
 $nonRecurentExpenses = $expenseController->getNonRecurentExpenses();
+$totalExpenses = 0;
+
+foreach ($nonRecurentExpenses as $expense) {
+    $totalExpenses += $expense->amount;
+}
 ?>
 <div class="container my-5">
     <div class="row justify-content-center">
@@ -47,7 +52,7 @@ $nonRecurentExpenses = $expenseController->getNonRecurentExpenses();
             <?php endif; ?>
         </div>
         <div>
-            <h2>Autres dépenses</h2>
+            <h2>30 Dernières dépenses : <?= $totalExpenses ?> €</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
             <?php if ($nonRecurentExpenses) : ?>

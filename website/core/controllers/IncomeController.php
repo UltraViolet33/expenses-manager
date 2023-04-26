@@ -19,6 +19,12 @@ class IncomeController
         $this->incomeModel->delete($id);
     }
 
+    public function getNonRecurentIncomes(): array
+    {
+        return $this->incomeModel->selectNonRecurentIncomes();
+    }
+    
+
     public function getAllIncomes(): array
     {
         $allRecurentIncomes = $this->incomeModel->selectRecurentIncomes();

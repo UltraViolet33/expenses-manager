@@ -38,7 +38,8 @@ class Income
 
     public function selectNonRecurentIncomes(): array
     {
-        $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at FROM incomes AS inc WHERE inc.id_recurence IS  NULL;";
+        $sql = "SELECT inc.id_income, inc.name AS income_name, inc.amount, inc.created_at FROM incomes AS inc 
+        WHERE inc.id_recurence IS  NULL LIMIT 30";
         return $this->db->read($sql);
     }
 

@@ -154,7 +154,7 @@ class ExpenseController
     //     return $balance;
     // }
 
-    public function getTotalRecurentExpenses(): int
+    public function getTotalRecurentExpenses(): float
     {
         $recurentExpenses = $this->getAllRecurentExpenses();
         $totalExpenses = 0;
