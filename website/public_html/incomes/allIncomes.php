@@ -1,13 +1,18 @@
 <?php require_once '../../inc/header.php';
 
-$allIncomes = $incomeController->getAllIncomes();
-$recurentIncomes = $allIncomes[1];
-
+$recurentIncomes = $incomeController->getRecurentIncomes();
 $totalRecurent = 0;
+
 foreach ($recurentIncomes as $income) {
     $totalRecurent += $income->amount;
 }
-$otherIncomes = $allIncomes[0];
+
+$incomes = $incomeController->getNonRecurentIncomes();
+$totalIncomes = 0;
+
+foreach ($incomes as $income) {
+    $totalIncomes += $income->amount;
+}
 ?>
 <div class="container my-5">
     <div class="row justify-content-center">
@@ -47,10 +52,10 @@ $otherIncomes = $allIncomes[0];
             <?php endif; ?>
         </div>
         <div>
-            <h2>30 Derniers revenus</h2>
+            <h2>30 Derniers revenus : <?= $totalIncomes ?> €</h2>
         </div>
         <div class="col-12 col-md-9 my-5">
-            <?php if ($otherIncomes) : ?>
+            <?php if ($incomes) : ?>
                 <table class="table">
                     <thead>
                         <tr>
@@ -63,7 +68,7 @@ $otherIncomes = $allIncomes[0];
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($otherIncomes as $income) : ?>
+                        <?php foreach ($incomes as $income) : ?>
                             <tr>
                                 <th scope="row"><?= $income->id_income ?></th>
                                 <td><?= $income->income_name ?></td>

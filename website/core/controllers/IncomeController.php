@@ -2,10 +2,8 @@
 
 require_once __DIR__ . "/../models/Income.php";
 
-
 class IncomeController
 {
-
     private Income $incomeModel;
 
     public function __construct()
@@ -19,26 +17,32 @@ class IncomeController
         $this->incomeModel->delete($id);
     }
 
+
     public function getNonRecurentIncomes(): array
     {
         return $this->incomeModel->selectNonRecurentIncomes();
     }
+
+
+    public function getRecurentIncomes(): array
+    {
+        return $this->incomeModel->selectRecurentIncomes();
+    }
     
 
-    public function getAllIncomes(): array
-    {
-        $allRecurentIncomes = $this->incomeModel->selectRecurentIncomes();
-        $nonRecurentIncomes = $this->incomeModel->selectNonRecurentIncomes();
+    // public function getAllIncomes(): array
+    // {
+    //     $allRecurentIncomes = $this->incomeModel->selectRecurentIncomes();
+    //     $nonRecurentIncomes = $this->incomeModel->selectNonRecurentIncomes();
 
-        return [$nonRecurentIncomes, $allRecurentIncomes];
-    }
+    //     return [$nonRecurentIncomes, $allRecurentIncomes];
+    // }
 
 
     public function getSingleIncome(int $id)
     {
         return $this->incomeModel->selectSingleIncome($id);
     }
-
 
 
     public function add()
@@ -154,7 +158,7 @@ class IncomeController
 
     public function getTotalRecurentIncomes(): int
     {
-        $recurentIncomes = $this->getAllIncomes()[1];
+        $recurentIncomes = $this->getRecurentIncomes();
 
         $totalIncomes = 0;
 
