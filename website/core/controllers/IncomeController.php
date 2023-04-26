@@ -145,4 +145,17 @@ class IncomeController
 
         $this->incomeModel->create($newIncome);
     }
+
+    public function getTotalRecurentIncomes(): int
+    {
+        $recurentIncomes = $this->getAllIncomes()[1];
+
+        $totalIncomes = 0;
+
+        foreach ($recurentIncomes as $income) {
+            $totalIncomes += $income->amount;
+        }
+
+        return $totalIncomes;
+    }
 }

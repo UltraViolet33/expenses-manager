@@ -131,27 +131,39 @@ class ExpenseController
         return $this->expenseModel->getLeftRecurentExpenses();
     }
 
-    public function getBalance()
+    // public function getBalance()
+    // {
+    //     $recurentExpenses = $this->getAllRecurentExpenses();
+    //     $recurentIncomes = (new IncomeController())->getAllIncomes()[1];
+
+    //     $totalExpenses = 0;
+    //     $totalIncomes = 0;
+
+    //     foreach ($recurentExpenses as $expense) {
+    //         $totalExpenses += $expense->amount;
+    //     }
+
+    //     foreach ($recurentIncomes as $income) {
+    //         $totalIncomes += $income->amount;
+    //     }
+
+    //     $balance = $totalIncomes - $totalExpenses;
+
+    //     $balance = $balance > 0 ? "+ " . $balance : $balance;
+
+    //     return $balance;
+    // }
+
+    public function getTotalRecurentExpenses(): int
     {
         $recurentExpenses = $this->getAllRecurentExpenses();
-        $recurentIncomes = (new IncomeController())->getAllIncomes()[1];
-
         $totalExpenses = 0;
-        $totalIncomes = 0;
 
         foreach ($recurentExpenses as $expense) {
             $totalExpenses += $expense->amount;
         }
 
-        foreach ($recurentIncomes as $income) {
-            $totalIncomes += $income->amount;
-        }
-
-        $balance = $totalIncomes - $totalExpenses;
-
-        $balance = $balance > 0 ? "+ " . $balance : $balance;
-
-        return $balance;
+        return $totalExpenses;
     }
 
     public function validateExpense(array $data)
