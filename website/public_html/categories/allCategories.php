@@ -18,10 +18,9 @@ $categories = $categoryController->getAll();
                     <?php foreach ($categories as $category) : ?>
                         <tr>
                             <th scope="row"><?= $category->id_category ?></th>
-                            <td><?= $category->name ?></td>
+                            <td><a href="expensesByCategories.php?id=<?= $category->id_category ?>"> <?= $category->name ?></a></td>
                             <td><a href="editCategory.php?id=<?= $category->id_category ?>" class="btn btn-primary">Edit</a></td>
                             <td><a href="deleteCategory.php?id=<?= $category->id_category ?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
-                        
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

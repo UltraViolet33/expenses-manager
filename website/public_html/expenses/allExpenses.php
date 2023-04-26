@@ -12,6 +12,7 @@ foreach ($nonRecurentExpenses as $expense) {
     $totalExpenses += $expense->amount;
 }
 ?>
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div>

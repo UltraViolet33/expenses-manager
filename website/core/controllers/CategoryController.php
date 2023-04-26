@@ -14,6 +14,12 @@ class CategoryController
     }
 
 
+    public function getExpensesByCategory(int $idCategory): array
+    {
+        return (new Expense())->getExpensesByCategory($idCategory);
+    }
+
+
     public function getAll(): array
     {
         return $this->categoryModel->selectAll();

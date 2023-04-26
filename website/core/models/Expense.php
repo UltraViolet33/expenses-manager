@@ -72,6 +72,18 @@ class Expense
     }
 
 
+    public function getExpensesByCategory(int $idCategory): array
+    {
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name, 
+        ex.amount, ex.created_at FROM expenses AS ex 
+        JOIN categories AS cat ON ex.id_category = cat.id_category 
+        WHERE ex.id_recurence IS NULL AND ex.id_category = :id_category
+         ORDER BY ex.created_at DESC LIMIT 30";
+
+        return $this->db->read($sql, ["id_category" => $idCategory]);
+    }
+
+
     public function update(array $data)
     {
         $sql = "UPDATE expenses SET name = :name, amount = :amount, created_at = :created_at, 
