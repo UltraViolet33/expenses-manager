@@ -51,7 +51,7 @@ class Expense
 
     public function selectRecurentExpenses(): array
     {
-        $sql = "SELECT ex.id_expense, ex.name AS expense_name, ex.amount, ex.created_at, 
+        $sql = "SELECT ex.id_expense, ex.name AS expense_name,ex.status, ex.amount, ex.created_at, 
         categories.name AS category_name, recurences.period FROM expenses AS ex
         INNER JOIN categories ON ex.id_category = categories.id_category  
         INNER JOIN recurences ON recurences.id_recurence = ex.id_recurence

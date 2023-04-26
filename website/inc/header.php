@@ -85,6 +85,9 @@ $incomeController = new IncomeController();
                     <li class="nav-item">
                         <a class="nav-link" href="/data.php">Historique</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recurences.php">Récurences</a>
+                    </li>
                 </ul>
             </div>
         </div>
