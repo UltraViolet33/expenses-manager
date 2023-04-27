@@ -65,15 +65,13 @@ class Expense
         $sql = "SELECT cat.name AS category_name, ex.id_expense, ex.name AS expense_name, 
         ex.amount, ex.created_at FROM expenses AS ex 
         JOIN categories AS cat ON ex.id_category = cat.id_category 
-        WHERE ex.id_recurence IS NULL AND WHERE ex.created_at LIKE '2023-03-%'";
+        WHERE ex.id_recurence IS NULL AND ex.created_at LIKE  :date";
 
         $month = $month > 9 ? $month : "0".$month;
 
         $date = date("Y")."-".$month."-%";
 
-        // return $this->db->read($sql, ["date" => date("Y")."-$month-%"]);
-        return $this->db->read($sql);
-
+        return $this->db->read($sql, ["date" => date("Y")."-$month-%"]);
     }
 
 

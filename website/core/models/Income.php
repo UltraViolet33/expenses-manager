@@ -43,6 +43,14 @@ class Income
         return $this->db->read($sql);
     }
 
+    public function selectNonRecurentIncomesByMonth(int $month): array
+    {
+        $sql = "SELECT inc.amount FROM incomes AS inc 
+        WHERE inc.id_recurence IS  NULL AND inc.created_at LIKE :date";
+
+        return $this->db->read($sql, ["date" => date("Y") . "-$month-%"]);
+    }
+
 
     public function selectSingleIncome($id)
     {

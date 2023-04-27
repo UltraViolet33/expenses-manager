@@ -28,7 +28,7 @@ class IncomeController
     {
         return $this->incomeModel->selectRecurentIncomes();
     }
-    
+
 
     // public function getAllIncomes(): array
     // {
@@ -42,6 +42,20 @@ class IncomeController
     public function getSingleIncome(int $id)
     {
         return $this->incomeModel->selectSingleIncome($id);
+    }
+
+    
+    public function getTotalIncomesByMonth(int $month): float
+    {
+        $incomesByMonth = $this->incomeModel->selectNonRecurentIncomesByMonth($month);
+
+        $total = 0;
+
+        foreach ($incomesByMonth as $income) {
+            $total += $income->amount;
+        }
+
+        return $total;
     }
 
 
