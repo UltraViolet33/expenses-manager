@@ -27,7 +27,7 @@ $expensesMonthByCategories = $expenseController->getMonthExpensesGroupByCategori
             <h1 align="center"><?= $actualMonth ?></h1>
             <h1>Portefeuille : <?= $wallet->amount ?> €</h1>
         </div>
-        <div>
+        <div class="my-5">
             <h3>Total de dépenses mois : <?= $totalExpenses ?> €</h3>
             <h3>Total de revenus mois : <?= $totalIncomes ?> €</h3>
             <h3>Balance : <?= $totalIncomes - $totalExpenses ?> €</h3>

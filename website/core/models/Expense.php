@@ -128,7 +128,7 @@ class Expense
         $sql = "SELECT DATE_FORMAT(ex.created_at, '%M %Y') AS month, ex.id_category, 
         cat.name AS category_name,  SUM(ex.amount) AS total_expenses FROM expenses AS ex 
         INNER JOIN categories AS cat ON cat.id_category = ex.id_category WHERE ex.id_recurence IS NULL
-        GROUP BY DATE_FORMAT(ex.created_at, '%M %Y'), ex.id_category  ORDER BY STR_TO_DATE(CONCAT( month, ' 01'), '%M %Y %d') DESC";
+        GROUP BY DATE_FORMAT(ex.created_at, '%M %Y'), ex.id_category  ORDER BY STR_TO_DATE(CONCAT( month, ' 01'), '%M %Y %d') DESC, total_expenses DESC";
         return $this->db->read($sql);
     }
 

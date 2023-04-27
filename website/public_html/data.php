@@ -1,6 +1,7 @@
 <?php require_once '../inc/header.php';
 
 $allExpenses = $expenseController->getExpensesGroupByMonthAndCategory();
+
 $allMonths = [];
 if ($allExpenses) {
 
