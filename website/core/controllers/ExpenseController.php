@@ -188,4 +188,15 @@ class ExpenseController
     {
         return $this->expenseModel->getExpensesByMonth($month);
     }
+
+    public function getExpensesPastWeek()
+    {
+        return $this->expenseModel->selectExpensesPastWeek();
+    }
+    
+
+    public function getMonthExpensesGroupByCategories(int $month)
+    {
+        return $this->expenseModel->selectMonthExpensesGroupByCategories($month);
+    }
 }

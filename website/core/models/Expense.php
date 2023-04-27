@@ -67,11 +67,21 @@ class Expense
         JOIN categories AS cat ON ex.id_category = cat.id_category 
         WHERE ex.id_recurence IS NULL AND ex.created_at LIKE  :date";
 
-        $month = $month > 9 ? $month : "0".$month;
+        $month = $month > 9 ? $month : "0" . $month;
 
-        $date = date("Y")."-".$month."-%";
+        $date = date("Y") . "-" . $month . "-%";
 
-        return $this->db->read($sql, ["date" => date("Y")."-$month-%"]);
+        return $this->db->read($sql, ["date" => date("Y") . "-$month-%"]);
+    }
+
+    public function selectExpensesPastWeek(): array
+    {
+        $sql = "SELECT cat.name AS category_name, ex.id_expense, ex.name AS expense_name, 
+        ex.amount, ex.created_at FROM expenses AS ex 
+        JOIN categories AS cat ON ex.id_category = cat.id_category 
+        WHERE ex.id_recurence IS NULL AND ex.created_at BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()";
+
+        return $this->db->read($sql);
     }
 
 
@@ -122,6 +132,15 @@ class Expense
         return $this->db->read($sql);
     }
 
+    public function selectMonthExpensesGroupByCategories(int $month)
+    {
+        $month = $month > 9 ? $month : "0" . $month;
+
+        $sql = "SELECT ex.id_category, cat.name AS category_name, SUM(ex.amount) AS total_expenses FROM expenses AS ex 
+        INNER JOIN categories AS cat ON cat.id_category = ex.id_category WHERE ex.id_recurence IS NULL and ex.created_at LIKE :date
+        GROUP BY ex.id_category ORDER BY total_expenses DESC";
+        return $this->db->read($sql, ["date" => date("Y") . "-$month-%"]);
+    }
 
     public function resetStatusRecurentExpenses()
     {
