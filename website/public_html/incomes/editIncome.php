@@ -9,31 +9,11 @@ if (!isset($_GET['id'])) {
     header("Location: /incomes/allIncomes.php");
 }
 
-// $singleIncome = $incomeModel->getSingleIncome($_GET['id']);
-
 $singleIncome = $incomeController->getSingleIncome($_GET["id"]);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $incomeController->edit($_GET["id"]);
-    // $data = [];
-    // $data['id_income'] = $singleIncome->id_income;
-
-    // if (isset($_POST['recurrence'])) {
-
-    //     $data['id_recurence'] = $_POST['period'];
-    //     $data['created_at'] = Date('Y-m-d');
-    // } else {
-    //     $data['id_recurence'] = null;
-    //     $data['created_at'] = $_POST['created_at'];
-    // }
-
-
-    // $data['name'] = $format->validation($_POST['name']);
-    // $data['amount'] = $format->validation($_POST['amount']);
-    // $incomeModel->update($data);
-
-    // echo "<script>location.replace('/allIncomes.php')</script>";
 }
 ?>
 <div class="container my-5">

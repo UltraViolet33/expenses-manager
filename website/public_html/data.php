@@ -2,7 +2,6 @@
 
 $script = "assets/js/data.js";
 
-
 $allExpenses = $expenseController->getExpensesGroupByMonthAndCategory();
 
 $allMonths = [];

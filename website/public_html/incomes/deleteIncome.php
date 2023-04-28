@@ -5,7 +5,6 @@ if (!isset($_GET['id'])) {
     header("Location: /incomes/allIncomes.php");
 }
 
-
 $incomeController->delete($_GET["id"]);
 
 header("Location: /incomes/allIncomes.php");

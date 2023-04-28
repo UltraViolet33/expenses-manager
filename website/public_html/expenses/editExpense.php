@@ -11,30 +11,8 @@ $allRecurences = $recurenceController->getAll();
 
 $singleExpense = $expenseController->getSingleExpense($_GET['id']);
 
-var_dump($singleExpense);
-
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-
-
     $expenseController->edit($singleExpense->id_expense);
-
-    // $data = [];
-    // $data['created_at'] = Date('Y-m-d');
-
-    // if (isset($_POST['recurrence'])) {
-    //     $data['id_recurence'] = $_POST['period'];
-    // } else {
-    //     $data['id_recurence'] = null;
-    // }
-
-    // $data['name'] = $format->validation($_POST['name']);
-    // $data['amount'] = $format->validation($_POST['amount']);
-    // $data['id_category'] = $format->validation($_POST['category']);
-
-    // $data['id_expense'] = $singleExpense->id_expense;
-
-    // $expense->update($data);
-    // echo "<script>location.replace('/allExpenses.php')</script>";
 }
 ?>
 

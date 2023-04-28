@@ -1,23 +1,13 @@
 <?php
 require_once __DIR__ . '/../core/connection/Session.php';
 Session::init();
-// require_once __DIR__ . '/../core/classes/Category.php';
-// require_once __DIR__ . '/../core/classes/Recurence.php';
-// require_once __DIR__ . '/../core/classes/Expense.php';
-// require_once __DIR__ . '/../core/classes/Income.php';
 require_once __DIR__ . '/../core/helpers/Format.php';
 require_once __DIR__ . '/../core/helpers/Helper.php';
 
 define('ROOT', "/public_html");
 
-// $category = new Category();
-// $recurenceModel = new Recurence();
-// $expense = new Expense();
-// $incomeModel = new Income();
 $format = new Format();
 $helperClass = new Helper();
-
-
 
 require_once __DIR__ . '/../core/controllers/CategoryController.php';
 $categoryController = new CategoryController();
