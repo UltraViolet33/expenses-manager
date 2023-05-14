@@ -46,7 +46,9 @@ class Income
     public function selectNonRecurentIncomesByMonth(int $month): array
     {
         $sql = "SELECT inc.amount FROM incomes AS inc 
-        WHERE inc.id_recurence IS  NULL AND inc.created_at LIKE :date";
+        WHERE inc.id_recurence IS NULL AND inc.created_at LIKE :date";
+
+        $month = $month > 9 ? $month : "0" . $month;
 
         return $this->db->read($sql, ["date" => date("Y") . "-$month-%"]);
     }

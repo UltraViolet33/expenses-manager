@@ -48,7 +48,6 @@ class IncomeController
     public function getTotalIncomesByMonth(int $month): float
     {
         $incomesByMonth = $this->incomeModel->selectNonRecurentIncomesByMonth($month);
-
         $total = 0;
 
         foreach ($incomesByMonth as $income) {
