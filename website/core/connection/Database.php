@@ -17,6 +17,7 @@ class Database
     {
         $string = "mysql:host=" . HOST . ";dbname=" . DBNAME;
         $this->pdoInstance =  new PDO($string, USERNAME, PASSWORD);
+        $this->pdoInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
 
@@ -38,7 +39,7 @@ class Database
     }
 
 
-    public function read($query, array $data = [])
+    public function read($query, array $data = []): array
     {
         $this->getConnection();
 
@@ -53,7 +54,7 @@ class Database
         }
 
         $this->closeConnection();
-        return false;
+        return [];
     }
 
     public function write($query, $data = array())

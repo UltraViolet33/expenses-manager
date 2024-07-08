@@ -1,15 +1,28 @@
 <?php
 require_once __DIR__ . '/../core/connection/Session.php';
 Session::init();
-require_once __DIR__ . '/../core/classes/User.php';
-require_once __DIR__ . '/../core/classes/Category.php';
-require_once __DIR__ . '/../core/classes/Expense.php';
 require_once __DIR__ . '/../core/helpers/Format.php';
+require_once __DIR__ . '/../core/helpers/Helper.php';
+
 define('ROOT', "/public_html");
-$user = new User();
-$category = new Category();
-$expense = new Expense();
+
 $format = new Format();
+$helperClass = new Helper();
+
+require_once __DIR__ . '/../core/controllers/CategoryController.php';
+$categoryController = new CategoryController();
+
+require_once __DIR__ . '/../core/controllers/RecurenceController.php';
+$recurenceController = new RecurenceController();
+
+
+require_once __DIR__ . '/../core/controllers/ExpenseController.php';
+$expenseController = new ExpenseController();
+
+
+require_once __DIR__ . '/../core/controllers/IncomeController.php';
+$incomeController = new IncomeController();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,37 +39,45 @@ $format = new Format();
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div class="container-fluid ">
-            <a href="post" class="navbar-brand text-white">Expenses Manager</a>
+            <a href="/" class="navbar-brand text-white">Expenses Manager</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-
-                    <?php if (Session::get('userId')) : ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?= ROOT ?>">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./addExpense.php">Ajouter une dépense</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./categories/allCategories.php">Catégories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./data.php">Historique</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./recurences.php">Recurentes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./logout.php">log out</a>
-                        </li>
-                    <?php else : ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./login.php">Login</a>
-                        </li>
-                    <?php endif; ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Expenses
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/expenses/allExpenses.php">All expenses</a></li>
+                            <li><a class="dropdown-item" href="/expenses/addExpense.php">Add an expense</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Incomes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/incomes/allIncomes.php">All incomes</a></li>
+                            <li><a class="dropdown-item" href="/incomes/addIncome.php">Add an income</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/categories/allCategories.php">All categories</a></li>
+                            <li><a class="dropdown-item" href="/categories/addCategory.php">Add a category</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/data.php">Historique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recurences.php">Récurences</a>
+                    </li>
                 </ul>
             </div>
         </div>

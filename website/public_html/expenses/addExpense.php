@@ -1,35 +1,14 @@
-<?php require_once '../inc/header.php';
-$categories = $category->getAll();
-$script = "addCategory.js";
+<?php require_once '../../inc/header.php';
+
+$script = "../assets/js/expenseForm.js";
+
+$categories = $categoryController->getAll();
+$allRecurences = $recurenceController->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-
-    if (isset($_POST['recurrence'])) {
-        $date = null;
-        $period = $_POST['period'];
-        $recurrence = 1;
-    } else {
-
-        $date = $_POST['created_at'];
-        if (empty($date)) {
-            $date = Date('Y-m-d');
-        }
-        $period = null;
-        $recurrence = 0;
-    }
-
-    $name = $format->validation($_POST['name']);
-    $amount = $format->validation($_POST['amount']);
-    $category = $format->validation($_POST['category']);
-    $expense->create($name, $amount, $date, $category, $period, $recurrence);
-    echo "<script>location.replace('/')</script>";
+    $expenseController->add();
 }
 ?>
-<?php if (!Session::get('userId')) : ?>
-    <script>
-        location.replace("login.php")
-    </script>
-<?php endif; ?>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 mb-3">
@@ -40,16 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <input type="text" id="category_name" name="category_name" class="form-control">
                 </div>
                 <button id="btn-submit-cat" class="btn btn-primary">Valider</button>
-                <div id="message">
-
-                </div>
+                <p id="message"></p>
             </form>
         </div>
         <div class="col-12 col-md-8">
             <h1>Ajouter une dépense</h1>
             <form action="" method="POST">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Nom</label>
+                    <label for="name" class="form-label">Nom</label>            
                     <input type="text" name="name" class="form-control">
                 </div>
                 <div class="mb-3">
@@ -68,8 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 </div>
                 <div class="mb-3" id="period" style="display:none">
                     <select class="form-select" name="period">
-                        <option value="week">Each Week</option>
-                        <option value="month">Each Month</option>
+                        <?php foreach ($allRecurences as $recurence) : ?>
+                            <option value="<?= $recurence->id_recurence ?>"><?= $recurence->period ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -79,10 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                         <?php endforeach; ?>
                     </select>
                 </div>
-
                 <button class="btn btn-primary">Valider</button>
             </form>
+            <div class="bg-danger">
+                <?php
+                echo Session::get("error");
+                Session::unsetKey("error");
+                ?>
+            </div>
         </div>
     </div>
 </div>
-<?php require_once '../inc/footer.php' ?>
+<?php require_once '../../inc/footer.php' ?>
