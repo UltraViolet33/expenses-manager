@@ -12,7 +12,6 @@ class Helper
     }
 
 
-
     public function alertMessage($messageType, $head, $body)
     {
         return '

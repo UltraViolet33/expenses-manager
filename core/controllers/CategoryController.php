@@ -25,6 +25,7 @@ class CategoryController
         return $this->categoryModel->selectAll();
     }
 
+    
     public function add(string $name): bool
     {
         $checkIfExists = $this->categoryModel->selectByName($name);

@@ -33,9 +33,6 @@ class Expense
 
     public function create(array $data)
     {
-        // var_dump($data);
-        // die;
-
         $sql = "INSERT INTO expenses(name, amount, created_at, id_category, id_recurence, status) 
         VALUES (:name, :amount, :created_at, :id_category, :id_recurence, :status)";
 
@@ -68,9 +65,6 @@ class Expense
         WHERE ex.id_recurence IS NULL AND ex.created_at LIKE  :date";
 
         $month = $month > 9 ? $month : "0" . $month;
-
-        $date = date("Y") . "-" . $month . "-%";
-
         return $this->db->read($sql, ["date" => date("Y") . "-$month-%"]);
     }
 

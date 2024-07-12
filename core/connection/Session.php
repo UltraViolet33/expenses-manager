@@ -34,7 +34,7 @@ class Session
         return false;
     }
 
-    
+
     public static function destroy()
     {
         session_destroy();

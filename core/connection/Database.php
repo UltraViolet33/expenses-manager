@@ -9,7 +9,6 @@ class Database
     private string $username = USERNAME;
     private string $password = PASSWORD;
     private string $dbname = DBNAME;
-
     private ?PDO $pdoInstance;
 
 
@@ -34,7 +33,6 @@ class Database
         }
 
         $this->closeConnection();
-
         return false;
     }
 
@@ -57,6 +55,7 @@ class Database
         return [];
     }
 
+    
     public function write($query, $data = array())
     {
         $this->getConnection();
@@ -68,6 +67,7 @@ class Database
         }
         return false;
     }
+
 
     public function closeConnection()
     {

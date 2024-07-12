@@ -5,13 +5,13 @@ require_once __DIR__ . "/../models/Expense.php";
 
 class ExpenseController
 {
-
     private Expense $expenseModel;
 
     public function __construct()
     {
         $this->expenseModel = new Expense();
     }
+
 
     public function getSingleExpense(int $id)
     {
@@ -115,6 +115,7 @@ class ExpenseController
         return $this->expenseModel->delete($id);
     }
 
+
     public function getExpensesGroupByMonthAndCategory()
     {
         return $this->expenseModel->selectExpensesGroupByMonthAndCategory();
@@ -131,28 +132,6 @@ class ExpenseController
         return $this->expenseModel->getLeftRecurentExpenses();
     }
 
-    // public function getBalance()
-    // {
-    //     $recurentExpenses = $this->getAllRecurentExpenses();
-    //     $recurentIncomes = (new IncomeController())->getAllIncomes()[1];
-
-    //     $totalExpenses = 0;
-    //     $totalIncomes = 0;
-
-    //     foreach ($recurentExpenses as $expense) {
-    //         $totalExpenses += $expense->amount;
-    //     }
-
-    //     foreach ($recurentIncomes as $income) {
-    //         $totalIncomes += $income->amount;
-    //     }
-
-    //     $balance = $totalIncomes - $totalExpenses;
-
-    //     $balance = $balance > 0 ? "+ " . $balance : $balance;
-
-    //     return $balance;
-    // }
 
     public function getTotalRecurentExpenses(): float
     {
@@ -166,14 +145,11 @@ class ExpenseController
         return $totalExpenses;
     }
 
+
     public function validateExpense(array $data)
     {
         $this->expenseModel->validate($data);
-
-        // create expense
-
         $expense = $this->getSingleExpense($data["id_expense"]);
-
 
         $newExpense = [
             "name" => $expense->expense_name, "amount" => $expense->amount,
@@ -184,11 +160,13 @@ class ExpenseController
         $this->expenseModel->create($newExpense);
     }
 
+
     public function getExpensesByMonth(int $month)
     {
         return $this->expenseModel->getExpensesByMonth($month);
     }
 
+    
     public function getExpensesPastWeek()
     {
         return $this->expenseModel->selectExpensesPastWeek();

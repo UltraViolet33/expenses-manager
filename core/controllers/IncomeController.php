@@ -30,15 +30,6 @@ class IncomeController
     }
 
 
-    // public function getAllIncomes(): array
-    // {
-    //     $allRecurentIncomes = $this->incomeModel->selectRecurentIncomes();
-    //     $nonRecurentIncomes = $this->incomeModel->selectNonRecurentIncomes();
-
-    //     return [$nonRecurentIncomes, $allRecurentIncomes];
-    // }
-
-
     public function getSingleIncome(int $id)
     {
         return $this->incomeModel->selectSingleIncome($id);
@@ -99,8 +90,6 @@ class IncomeController
         $dataToCheck = ["name", "amount"];
 
         if ($this->checkPostValues($dataToCheck)) {
-
-            // $data['created_at'] = Date('Y-m-d');
             $data['created_at'] = Date('Y-m-d');
 
             if (isset($_POST['recurrence'])) {
@@ -151,14 +140,11 @@ class IncomeController
         return $this->incomeModel->getLeftRecurentIncomes();
     }
 
+    
     public function validateIncome(array $data)
     {
         $this->incomeModel->validate($data);
-
-        // create income
-
         $income = $this->getSingleIncome($data["id_income"]);
-
 
         $newIncome = [
             "name" => $income->income_name, "amount" => $income->amount,
@@ -169,10 +155,10 @@ class IncomeController
         $this->incomeModel->create($newIncome);
     }
 
+
     public function getTotalRecurentIncomes(): int
     {
         $recurentIncomes = $this->getRecurentIncomes();
-
         $totalIncomes = 0;
 
         foreach ($recurentIncomes as $income) {
